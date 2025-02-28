@@ -1,0 +1,76 @@
+
+
+
+.addbuttoncontent{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+
+}
+
+.addnewitemBtn{
+    
+    all: unset;
+    border-radius: 13px;
+    padding: 10px;
+        background-color: rgba(0, 185, 174, 1);
+    transition: 300ms;
+    cursor: pointer;
+}
+
+.addnewitemBtn:hover{ 
+
+    background-color: rgba(0, 185, 173, 0.568);
+
+}
+.Heading{
+
+    padding-left: 5px;
+}
+
+ 
+.ItemsList {
+    display: flex;        
+    align-items: center;    
+    justify-content: center;
+    flex-wrap: wrap;         
+    gap: 1x;               
+    max-height: 630px;        
+    overflow-y: auto;        
+    overflow-x: hidden;    
+    margin-top: 10px; 
+  }
+ 
+.ItemsList {
+    overflow: auto;  
+  }
+ 
+  .ItemsList::-webkit-scrollbar {
+    width: 8px;  
+    height: 8px;  
+  }
+  
+  .ItemsList::-webkit-scrollbar-track {
+    background: #f1f1f1;  
+    border-radius: 10px;
+  }
+  
+  .ItemsList::-webkit-scrollbar-thumb {
+    background: #888;  
+    border-radius: 10px;  
+  }
+  
+  .ItemsList::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+  
+  .ItemsList::-webkit-scrollbar-button {
+    background: #333;  
+  }
+  
+.MainWrapper {
+    width: 100%;
+   
+  }

@@ -1,0 +1,101 @@
+.Container{
+     
+    height: 254px;
+    width: 180px ;
+    padding: 5px;
+    background-color: rgba(52, 56, 64, 1);
+    margin: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 300ms;
+}
+.footerPrice{
+    color: white;
+}
+
+.Footerdiv{
+
+    max-width: 180px ;
+        overflow: hidden;
+    max-height: 70px;
+}
+
+.DateHeading{
+    color: rgba(227, 227, 227, 1);
+}
+.Container:hover{
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+ }
+ .ContainerHeading{
+    display: flex;
+    justify-content: space-between;
+       
+ }
+ .DateHeading{
+    display: flex;
+    
+     
+ }
+
+   
+
+
+.MainWrapper{
+     
+   
+   
+     box-sizing: border-box;
+}
+.ImageItem{
+
+    width: 180px ;
+    height: 150px;
+
+}
+
+.CrudButtonEdit{
+
+    all: unset;
+    color: rgba(84, 109, 233, 1);
+    cursor: pointer;
+}
+
+.CrudButtonEdit:hover{
+    color: rgb(66, 85, 181);
+}
+
+
+.CrudButtonRemove{
+    all: unset;
+    color: rgba(255, 0, 0, 1);
+    cursor: pointer;
+}
+
+.CrudButtonRemove:hover{
+    color: rgba(255, 0, 0, 0.5);
+}
+
+.CrudButtons{
+     
+}
+
+.footerTxt{
+    color: white;
+    font-size: 11px;
+ 
+    height: 29px;
+    margin-bottom: 1px;
+}
+
+.footerTxtTitle{
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 1px;
+    height: 20px;
+  
+    overflow: hidden;
+   
+}
+ 

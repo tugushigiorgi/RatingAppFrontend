@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes , Switch} from "react-router-dom
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import PasswordResetPage from "./Pages/PasswordResetPage/PasswordResetPage";
- 
+ import ProfilePage from "./Pages/ProfilePage/ProfilePage";
 function App() {
   return (
     <Router>
@@ -24,7 +24,11 @@ function App() {
                 exact
                 element={<PasswordResetPage />}    
                 />
-
+   <Route
+                path="/profile"
+                exact
+                element={<ProfilePage />}    
+                />
 
     </Routes>
 

@@ -52,10 +52,48 @@ class ApiService {
         }
 
     }
+        static async getItemById(id){
 
+            const token = localStorage.getItem('token');
 
-     
+            try {
+                const response = await axios.get(`${ApiService.apiBase}/item/${id}`, {
+                    headers: {
+                        Authorization: 'Bearer ' + token,
+                    },
+                });
+    
+    
+                if (response && response.status === 200 ) {
+                    return response.data.itemdto;
+                } else {
+    
+                    throw new Error(`Error fetching item by id. Status: ${response.status}`);
+    
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                throw error;
+            }
+        }
 
+        
+
+    static  async AddNewitem(formdata){
+        const token = localStorage.getItem("token");
+
+        try {
+            return await axios.post(`${ApiService.apiBase}/item/add`, formdata, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                     Authorization: 'Bearer ' + token
+                }
+            });
+        } catch (error) {
+            console.log(error);
+        }
+
+    } 
 
     
  
