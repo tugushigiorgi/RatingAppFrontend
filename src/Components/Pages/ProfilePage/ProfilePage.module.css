@@ -27,7 +27,7 @@
     justify-content: center;
     align-items: center;
     width: 400px;
-    height: 400px;
+    height: 445px;
     background-color: rgba(45, 51, 60, 1);
     border-radius: 10px;
     padding: 10px;
@@ -77,7 +77,7 @@ display: flex;
 
 .buttonContainer{
 
-padding: 10px;
+ 
 
 
 }
@@ -87,25 +87,28 @@ padding: 10px;
 }
 .profileContainer{
 
-    padding: 10px;
+    
     color: white;
 }
-.profileiconholder{
-     margin: 0;
-     padding: 0;
-            color: white;
-        font-size: 140px;
-
-}
+ 
 
 
 .navHeader{
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    
+    display: grid;
+    place-content: center;
 }
+.usernameDiv{
 
+    color: white;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 25px;
+}
 .buttonwrapper{
     all: unset;
     display: flex;
@@ -143,4 +146,14 @@ padding: 10px;
     background-color: rgba(0, 185, 174, 1);
 
     cursor: pointer;
+}
+
+.InnerFragment{
+    width: 100%;
+} 
+
+.ProfilePicture{
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
 }

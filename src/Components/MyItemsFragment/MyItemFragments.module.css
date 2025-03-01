@@ -34,13 +34,14 @@
 .ItemsList {
     display: flex;        
     align-items: center;    
-    justify-content: center;
+     
     flex-wrap: wrap;         
-    gap: 1x;               
+    padding: 2px;          
     max-height: 630px;        
     overflow-y: auto;        
     overflow-x: hidden;    
     margin-top: 10px; 
+    
   }
  
 .ItemsList {

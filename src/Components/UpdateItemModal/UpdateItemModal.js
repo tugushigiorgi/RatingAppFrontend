@@ -17,19 +17,6 @@ const UpdateItemModal = ({CloseUpdateModal,itemtoUpdate, updateItemHandler}) => 
     const [Successmessage, setSuccessmessage] = useState('');
     const photoInputRef = useRef();
  
-    const PopulateData = async () => {
-        
-        // try {
-        //     const response = await ApiService.getItemById(id);
-        //     setItemData(response.data);
-        // } catch (error) {
-        //     console.error(error);
-        // }
-
-
-    }
-
-    // useEffect(()=>PopulateData,[])
 
 
 
@@ -57,12 +44,13 @@ const UpdateItemModal = ({CloseUpdateModal,itemtoUpdate, updateItemHandler}) => 
         }  
         if (!price.trim()) {
             errors.push('Price is required.');
+            
            
         }  
-        // if(!photo) {
-        //     errors.push('Picture is required.');
+        if(!photo) {
+            errors.push('Picture is required.');
 
-        // }
+        }
        
         if (errors.length === 0) {
 
@@ -122,7 +110,7 @@ const UpdateItemModal = ({CloseUpdateModal,itemtoUpdate, updateItemHandler}) => 
 
 
         } else {
-         //   setUserInputErrorsData(errors);
+           setUserInputErrorsData(errors);
 
 
         }
@@ -160,9 +148,11 @@ const UpdateItemModal = ({CloseUpdateModal,itemtoUpdate, updateItemHandler}) => 
 
 
                     </div>
+                    <div className={style.InputTitle}>Picture</div>
+                    <img src={ItemData.photo} alt="Item" className={style.ItemImage}/>
                     <div className={style.Inputcontainer}>
-                        <div className={style.InputTitle}>Picture</div>
-                   
+                        
+                         
                         <input     className={style.photoinput}         ref={photoInputRef}  name="photo"    type="file" required={true} onInput={ handleGetInputData}   accept="image/gif,image/jpeg,image/png"  />
 
 

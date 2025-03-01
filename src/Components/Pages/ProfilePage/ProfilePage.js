@@ -58,13 +58,12 @@ const  ProfilePage=()=>{
 
             <div className={style.navHeader}>
 
-            <div className={style.ProfilePicturePlaceHolder}>
+         
+           
+  
+            <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" className={style.ProfilePicture} />
 
-            <span className={`material-symbols-outlined ${style.profileiconholder}`}>
-account_box
-</span>
- 
-            </div>
+            <div className={style.usernameDiv}>Giorgi tughushi</div>
 
 
 
@@ -78,14 +77,7 @@ account_box
 
 
                 <div className={style.UserInfoList}>
-                <div className={style.InfoData}>
-               <span className="material-symbols-outlined">
-               person
-</span>
-
-
-<div className={style.UserInfotxt}>Giorgi tugushi</div>
-               </div>
+                
                <div className={style.InfoData}>
                <span className="material-symbols-outlined">
 mail
@@ -164,7 +156,12 @@ category
             <div className={style.FragmentHeaderTitle}>Change Password</div>
 
             </div>
+
+            
+
             <ChangePasswordFragment/>
+          
+            
             </div>
   }
 

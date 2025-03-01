@@ -1,10 +1,10 @@
 .Container{
      
     height: 254px;
-    width: 180px ;
+    width: 173px ;
     padding: 5px;
     background-color: rgba(52, 56, 64, 1);
-    margin: 10px;
+    margin: 3px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     border-radius: 10px;
     cursor: pointer;
@@ -24,9 +24,8 @@
 .DateHeading{
     color: rgba(227, 227, 227, 1);
 }
-.Container:hover{
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
- }
+
+ 
  .ContainerHeading{
     display: flex;
     justify-content: space-between;
@@ -49,7 +48,7 @@
 }
 .ImageItem{
 
-    width: 180px ;
+    width: 173px ;
     height: 150px;
 
 }

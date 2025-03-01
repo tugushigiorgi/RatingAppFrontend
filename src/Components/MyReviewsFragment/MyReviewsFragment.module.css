@@ -1,0 +1,39 @@
+
+
+
+.ReviewsList{
+
+
+    display: flex;        
+    align-items: center;    
+     
+    flex-wrap: wrap;         
+    padding: 2px;          
+    max-height: 685px;        
+    overflow-y: auto;        
+    overflow-x: hidden;  
+}
+
+.ReviewsList::-webkit-scrollbar {
+    width: 8px;  
+    height: 8px;  
+  }
+  
+  .ReviewsList::-webkit-scrollbar-track {
+    background: #f1f1f1;  
+    border-radius: 10px;
+  }
+  
+  .ReviewsList::-webkit-scrollbar-thumb {
+    background: #888;  
+    border-radius: 10px;  
+  }
+  
+  .ReviewsList::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+  
+  .ReviewsList::-webkit-scrollbar-button {
+    background: #333;  
+  }
+  
