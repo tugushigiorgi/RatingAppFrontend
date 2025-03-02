@@ -4,9 +4,10 @@
     width: 290px;
     height: auto;
     border-radius: 10px;
-    padding: 8px;
+    padding: 10px;
+  
     color: white;
-    margin: 5px;
+    margin: 5px;  
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
@@ -21,12 +22,18 @@
 }
 
 .ScoreWrapper{
+    display: flex;
     margin-top: 10px;
     font-size: 50px;
     color: white;
+    align-items: center;
+    
 
 }
-
+.star{
+    margin-top: 9px;
+    font-size: 50px;
+}
 .commenttitle{
     font-weight: bold;
     margin-bottom: 3px;
@@ -37,3 +44,12 @@
 .MainWrapper:hover{
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
  } 
+
+ .MainWrapper{
+    display: grid;
+ }
+
+ .headingwrapper{
+    position: relative;
+    bottom: 5px;
+ }

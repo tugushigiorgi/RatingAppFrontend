@@ -3,25 +3,30 @@ import style from './AddNewItemModal.module.css';
 import {useEffect, useState,useRef} from "react";
 import ApiService from "../../Services/ApiService";
 const AddNewItemModal = ({CloseNewItemModal,addnewitemhandler}) => {
- const [NewItemData, setNewItemData] = useState({ title: '', text: '' , price: '', photo: '' });
-  
- const [userInputErrorsData, setUserInputErrorsData] = useState([]);
-    const handleGetInputData = (e) => {
-        const { value, name} = e.target;
-        setNewItemData((prevFormData) => ({
-            ...prevFormData,
-            [name]: value
-        }));
-    };
-    const [Successmessage, setSuccessmessage] = useState('');
+ 
     const photoInputRef = useRef();
+
+    const [state,setState]=useState({Successmessage:'',  userInputErrorsData:[],title: '', text: '' , price: '', photo: ''})
+
+     const handleGetInputData = (e) => {
+                const { value, name} = e.target;
+                setState((prevFormData) => ({
+                    ...prevFormData,
+                    [name]: value
+                }));
+            };
+
     const handleAddnewItem = async () => {
-        setUserInputErrorsData([]);
+        
+          setState((prevFormData) => ({
+        ...prevFormData,
+        userInputErrorsData:[]
+    }));
 
 
-        const { title , text , price , photo  } = NewItemData;
 
-
+      
+     const { title , text , price , photo  } = state;
 
         const errors = [];
 
@@ -43,12 +48,15 @@ const AddNewItemModal = ({CloseNewItemModal,addnewitemhandler}) => {
 
        // addnewitem()
 
-        console.log(NewItemData)
+  
         if (errors.length === 0) {
 
             addnewitemhandler();
-
-             
+                    console.log(state);
+                    setState((prevFormData) => ({
+                        ...prevFormData,
+                        userInputErrorsData:[]
+                    }));
             //  try {
             //     const formDataToSend = new FormData();
             //     formDataToSend.append('title', NewItemData.title);
@@ -101,8 +109,11 @@ const AddNewItemModal = ({CloseNewItemModal,addnewitemhandler}) => {
 
 
         } else {
-            setUserInputErrorsData(errors);
-
+            //setUserInputErrorsData(errors);
+            setState((prevFormData) => ({
+                ...prevFormData,
+                userInputErrorsData:[...errors]
+            }));
 
         }
     };
@@ -148,10 +159,10 @@ const AddNewItemModal = ({CloseNewItemModal,addnewitemhandler}) => {
                     </div>
 
                 </div>
-             { Successmessage &&  <div className={style.Successmessage}>
-                    {Successmessage}</div>}
+             { state.Successmessage &&  <div className={style.Successmessage}>
+                    {state.Successmessage}</div>}
                   <div className={style.errorWrapper}>
-                                      {userInputErrorsData && userInputErrorsData.map(err => <div key={err} className={style.Errordiv}>{err}</div>)}
+                                      {state.userInputErrorsData && state.userInputErrorsData.map(err => <div key={err} className={style.Errordiv}>{err}</div>)}
                                     </div>
                     <div className={style.Footerdv}>
                         <button onClick={handleAddnewItem} className={style.Addbtn}>Add</button>

@@ -9,26 +9,38 @@ const  LoginPage=()=>{
 
 
     const emailValidationRegex = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
+ 
+    const [state,setState] = useState({ForgotPasswordModal:false,userInputErrorsData:[], email: '', password: ''});
 
-    const [userInputErrorsData, setUserInputErrorsData] = useState([]);
-    const [loginData, setLoginData] = useState({ email: '', password: '' });
-    const [ForgotPasswordModal, setForgotPasswordModal] = useState(false);
-    const handleGetLoginData = (e) => {
-        const { value, name } = e.target;
-        setLoginData(loginData => {
-            return {
-                ...loginData,
-                [name]: value
-            }
-        })
-    };
+     const handleGetLoginData = (e) => {
+            const { value, name } = e.target;
+            setState(prevdata => {
+                return {
+                    ...prevdata ,
+                    [name]: value
+                }
+            })
+        }
+ 
+const openResetModal = ( ) => {
 
+    setState(prevdata => {
+        return {
+            ...prevdata ,
+            ForgotPasswordModal:true
+        }
+    })
+}
 
 const ClosePasswordResetModal = ( ) => {
-    
-    setForgotPasswordModal(false);
-
+    setState(prevdata => {
+    return {
+        ...prevdata ,
+        ForgotPasswordModal:false
     }
+})
+}
+    
 
     useEffect(()=>{
 
@@ -43,10 +55,13 @@ const ClosePasswordResetModal = ( ) => {
     
 
     const handleActionLogin = async () => {
-        setUserInputErrorsData([]);
-
-
-        const { email, password } = loginData;
+       setState(prevdata => {
+            return {
+                ...prevdata ,
+                userInputErrorsData:[]
+            }
+        })
+        const { email, password } = state;
 
 
 
@@ -68,36 +83,51 @@ const ClosePasswordResetModal = ( ) => {
 
             try {
 
-                const result = await ApiService.Login(loginData);
+                const result = await ApiService.Login(state);
 
                 if (result) {
 
                    navigate("/")
 
                 } else {
-
-                    setUserInputErrorsData(['Invalid email or password']);
+                    setState(prevdata => {
+                        return {
+                            ...prevdata ,
+                            userInputErrorsData:['Invalid email or password']
+                        }
+                    })
+                  //  setUserInputErrorsData(['Invalid email or password']);
                 }
             } catch (error) {
-
-                setUserInputErrorsData([error.message]);
+                setState(prevdata => {
+                    return {
+                        ...prevdata ,
+                        userInputErrorsData:[...error.message]
+                    }
+                })
+                
             }
 
 
 
 
         } else {
-            setUserInputErrorsData(errors);
-
+        //    setUserInputErrorsData(errors);
+            setState(prevdata => {
+                return {
+                    ...prevdata ,
+                    userInputErrorsData:[...errors ]
+                }
+            })
 
         }
     };
 
 
 
-    return (<div>
+    return  <div>
 
-       {ForgotPasswordModal && <ForgetPasswordModal  ClosePasswordResetModal={ClosePasswordResetModal} ></ForgetPasswordModal>}
+       {state.ForgotPasswordModal && <ForgetPasswordModal  ClosePasswordResetModal={ClosePasswordResetModal} />}
         <div className={style.Maindiv}>
             <Link to="/">  
                 <img   className={style.leverxlogo} src = "https://workshub.imgix.net/63e1b0e3502ceaf9de3491ac0f8deed7?fit=clip&crop=entropy&auto=format" />
@@ -121,11 +151,11 @@ const ClosePasswordResetModal = ( ) => {
 
                     </div>
                     <div>
-                        <button onClick={()=>setForgotPasswordModal(true)} className={style.forgotpasslink}>Forgot Password?</button>
+                        <button onClick={()=> openResetModal()} className={style.forgotpasslink}>Forgot Password?</button>
                     </div>
 
                     <div className={style.errorWrapper}>
-                      {userInputErrorsData && userInputErrorsData.map(err => <div key={err} className={style.Errordiv}>{err}</div>)}
+                      {state.userInputErrorsData && state.userInputErrorsData.map(err => <div key={err} className={style.Errordiv}>{err}</div>)}
                     </div>
 
                   
@@ -151,7 +181,7 @@ const ClosePasswordResetModal = ( ) => {
 
         </div>
 
-    </div>)
+    </div> 
 
 
 }

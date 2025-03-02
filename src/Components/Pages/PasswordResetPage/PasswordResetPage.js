@@ -6,25 +6,32 @@ import ApiService from "../../../Services/ApiService";
  
 const  PasswordResetPage=()=>{
     const navigate = useNavigate();
-      const [userInputErrorsData, setUserInputErrorsData] = useState([]);
-    const [resetpasswordData, setresetpasswordData] = useState({ code: '', password: '',repeatpassword: '' });
-    const [successResetMessage, setsuccessResetMessage] = useState(false)
-    const handleGetResetData = (e) => {
+    const [state,setState]=useState({successResetMessage:false,userInputErrorsData:[],code: '', password: '',repeatpassword: ''});
+
+
+  const handleGetResetData = (e) => {
         const { value, name } = e.target;
-        setresetpasswordData(resetpasswordData => {
+        setState(prevdata => {
             return {
-                ...resetpasswordData,
+                ...prevdata,
                 [name]: value
             }
         })
     };
 
+
+
  
     const handleActionReset = async () => {
-        setUserInputErrorsData([]);
+      //  setUserInputErrorsData([]);
+        setState(prevdata => {
+            return {
+                ...prevdata,
+                userInputErrorsData:[]
+            }
+        })
 
-
-         const { code, password ,repeatpassword} =resetpasswordData;
+         const { code, password ,repeatpassword} =state;
 
 
 
@@ -55,26 +62,47 @@ const  PasswordResetPage=()=>{
 
             try {
 
-                const result = await ApiService.ResetPassword(resetpasswordData);
+                const result = await ApiService.ResetPassword(state);
 
                 if (result) {
-
-                    setsuccessResetMessage(true)
+                    setState(prevdata => {
+                        return {
+                            ...prevdata,
+                            successResetMessage:true
+                        }
+                    })
+                   // setsuccessResetMessage(true)
 
                 } else {
-
-                    setUserInputErrorsData(['Invalid Code']);
+                    // setState(prevdata => {
+                    //     return {
+                    //         ...prevdata,
+                    //         userInputErrorsData:['Invalid Code']
+                    //     }
+                    // })
+                  //  setUserInputErrorsData(['Invalid Code']);
                 }
             } catch (error) {
-
-                setUserInputErrorsData([error.message]);
+                setState(prevdata => {
+                    return {
+                        ...prevdata,
+                        userInputErrorsData:[...error.message]
+                    }
+                })
+               // setUserInputErrorsData([error.message]);
             }
 
 
 
 
         } else {
-            setUserInputErrorsData(errors);
+            setState(prevdata => {
+                return {
+                    ...prevdata,
+                    userInputErrorsData:[...errors]
+                }
+            })
+          
 
 
         }
@@ -114,14 +142,14 @@ const  PasswordResetPage=()=>{
 
 
                     </div>
-                    {successResetMessage && <div  className={style.successdivwrapper} > <div className={style.successMessage}>Password changed successfully. </div> 
+                    {state.successResetMessage && <div  className={style.successdivwrapper} > <div className={style.successMessage}>Password changed successfully. </div> 
                     
                     <Link to={"/login"} className={style.loginhref}>Login</Link>
                 
                  </div>}
 
                     <div className={style.errorWrapper}>
-                      {userInputErrorsData && userInputErrorsData.map(err => <div key={err} className={style.Errordiv}>{err}</div>)}
+                      {state.userInputErrorsData && state.userInputErrorsData.map(err => <div key={err} className={style.Errordiv}>{err}</div>)}
                     </div>
 
                    

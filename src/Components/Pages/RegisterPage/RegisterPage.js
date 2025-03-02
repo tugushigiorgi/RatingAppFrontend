@@ -9,36 +9,42 @@ const RegisterPage = ()=>{
 
 
     const navigate = useNavigate();
-    const [userInputErrorsData, setUserInputErrorsData] = useState([]);
-    const [RegisterData, setRegisterData] = useState({ name: '', surname: '', email: '', password: '', repeatpassword: '' });
     const isValidEmail = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
+    // const [userInputErrorsData, setUserInputErrorsData] = useState([]);
+    // const [RegisterData, setRegisterData] = useState({ name: '', surname: '', email: '', password: '', repeatpassword: '' });
+   
+
+
+    const [state, setState] = useState({ userInputErrorsData:[],name: '', surname: '', email: '', password: '', repeatpassword: '' });
+
+
 
     const handleGetLoginData = (e) => {
         const { value, name } = e.target;
-        setRegisterData((RegisterData) => ({
-            ...RegisterData,
+        setState((prevdata) => ({
+            ...prevdata,
             [name]: value
         }));
     };
 
-        useEffect(()=>{
+        // useEffect(()=>{
 
-        const token = localStorage.getItem("token");
-        if(token) {
-            navigate("/")
-        }
-
-
-    },[])
+        // const token = localStorage.getItem("token");
+        // if(token) {
+        //     navigate("/")
+        // }},[])
 
     
 
     const handleActionLogin = async () => {
-        setUserInputErrorsData([]);
-
+     //   setUserInputErrorsData([]);
+        setState((prevdata) => ({
+            ...prevdata,
+            userInputErrorsData:[]
+        }));
         const errors = [];
 
-        const {name,surname, email, password, repeatpassword } = RegisterData;
+        const {name,surname, email, password, repeatpassword } = state;
 
 
         if(!name.trim()){
@@ -70,18 +76,24 @@ const RegisterPage = ()=>{
 
 
             try {
-                const result = await ApiService.Register(RegisterData);
+                const result = await ApiService.Register(state);
                 if (result) {
 
                     console.log('Register  successful');
                     navigate("/")
                 } else {
-
-                    setUserInputErrorsData(['Invalid email or password']);
+                    setState((prevdata) => ({
+                        ...prevdata,
+                        userInputErrorsData:['Invalid email or password']
+                    }));
+                  //  setUserInputErrorsData(['Invalid email or password']);
                 }
             } catch (error) {
-
-                setUserInputErrorsData([error.message]);
+                setState((prevdata) => ({
+                    ...prevdata,
+                    userInputErrorsData:["Server error"]
+                }));
+                //setUserInputErrorsData([error.message]);
             }
 
 
@@ -92,9 +104,12 @@ const RegisterPage = ()=>{
 
 
         } else {
-
-            setUserInputErrorsData(errors);
-            console.log(userInputErrorsData);
+            setState((prevdata) => ({
+                ...prevdata,
+                userInputErrorsData:[...errors]
+            }));
+            // setUserInputErrorsData(errors);
+            // console.log(userInputErrorsData);
         }
     };
 
@@ -139,7 +154,7 @@ const RegisterPage = ()=>{
 
 
                     <div className={style.errorWrapper}>
-                        {userInputErrorsData && userInputErrorsData.map(err => <div key={err}
+                        {state.userInputErrorsData && state.userInputErrorsData.map(err => <div key={err}
                                                                          className={style.Errordiv}>{err}</div>)}
 
 

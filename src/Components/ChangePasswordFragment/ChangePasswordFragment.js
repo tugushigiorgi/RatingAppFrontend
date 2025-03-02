@@ -75,7 +75,7 @@ const handleUpdate = async () => {
               setState(prevdata => {
                 return {
                     ...prevdata,
-                    userInputErrorsData:errors
+                    userInputErrorsData:[...errors]
                   }
                 })
             
