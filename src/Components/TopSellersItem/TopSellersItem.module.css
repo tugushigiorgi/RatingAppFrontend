@@ -1,0 +1,42 @@
+.MainWrapper{
+
+color: white;
+height: 50px;
+background-color: rgba(52, 56, 64, 1);
+border-radius: 10px;
+box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+width: 310px;
+cursor: pointer;
+transition: 300ms;
+margin-top: 5px;
+}
+.MainWrapper:hover{
+
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+
+}
+.Content{
+    display: flex;
+     
+}
+.usernamewrapper{
+    font-weight: bold;
+}
+.photo{
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+.imgwrapper{
+    margin-right: 5px;
+}
+
+.scorewrapper{
+    display: flex;
+    align-items: center;
+}
+
+.staricon{
+    font-size: 20px;
+}

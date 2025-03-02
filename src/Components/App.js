@@ -3,11 +3,16 @@ import LoginPage from "./Pages/LoginPage/LoginPage";
 import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import PasswordResetPage from "./Pages/PasswordResetPage/PasswordResetPage";
  import ProfilePage from "./Pages/ProfilePage/ProfilePage";
+ import MainPage from "./Pages/MainPage/MainPage";
 function App() {
   return (
     <Router>
     <Routes> 
-
+    <Route
+              path="/"
+              exact
+              element={<MainPage/>}
+          />
         <Route
               path="/login"
               exact

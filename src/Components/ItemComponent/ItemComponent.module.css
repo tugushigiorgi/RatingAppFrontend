@@ -1,0 +1,96 @@
+.Container{
+     
+    height: 262px;
+    width: 173px ;
+ 
+    background-color: rgba(52, 56, 64, 1);
+    margin: 7px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 10px;
+    cursor: pointer;
+ 
+    transition: 300ms;
+}
+
+/* .Container:hover{
+ 
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+
+} */
+.footerPrice{
+    float: right;
+    color: white;
+}
+
+.Footerdiv{
+
+    max-width: 180px ;
+        overflow: hidden;
+    max-height: 72px;
+  
+     padding: 3px;
+}
+.userphotowrapper{
+    width: 25px;
+    height: 25px;
+    border-radius: 2px;
+    margin-right: 3px;
+}
+.usernamewrapper{
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    position: relative;
+    bottom: 1px;
+}
+ 
+.userinfowrapper{
+    display: flex;
+    
+     cursor: pointer;
+     transition: 300ms;
+}
+
+.userinfowrapper:hover{
+
+ background-color: rgba(33, 36, 45, 1);
+}
+   
+
+
+.MainWrapper{
+     
+   
+   
+     box-sizing: border-box;
+}
+.ImageItem{
+
+    width: 173px ;
+    height: 150px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.txtdiv{
+    padding: 1px;
+}
+ 
+.footerTxt{
+    color: white;
+    font-size: 13px;
+ 
+    height: 29px;
+    margin-bottom: 1px;
+}
+
+.footerTxtTitle{
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 1px;
+    height: 20px;
+  
+    overflow: hidden;
+   
+}
+ 
