@@ -4,10 +4,21 @@ import RegisterPage from "./Pages/RegisterPage/RegisterPage";
 import PasswordResetPage from "./Pages/PasswordResetPage/PasswordResetPage";
  import ProfilePage from "./Pages/ProfilePage/ProfilePage";
  import MainPage from "./Pages/MainPage/MainPage";
-function App() {
+import SellerProfilePage from "./Pages/SellerProfilePage/SellerProfilePage";
+
+ function App() {
   return (
     <Router>
     <Routes> 
+
+      
+    <Route
+              path="/seller/:sellerid"
+              exact
+              element={<SellerProfilePage/>}
+          />
+
+
     <Route
               path="/"
               exact

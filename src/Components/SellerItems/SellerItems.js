@@ -1,11 +1,10 @@
 
 
-import style from './ItemComponent.module.css';
 
 
-const ItemComponent=({title,text,price,image,username,profilenav})=>{
+import style from "../SellerItems/SellerItems.module.css"
 
-
+const SellerItems=({image,title,text,price})=>{
     return (
         <div className={style.MainWrapper}>
             <div className={style.Container}>
@@ -18,12 +17,7 @@ const ItemComponent=({title,text,price,image,username,profilenav})=>{
                 <div className={style.ImageContainer}>
                     <img src={image} alt="Image" className={style.ImageItem}/>
                 </div>
-                <div className={style.txtdiv}> 
-                <div onClick={()=>console.log("AE")} className={style.userinfowrapper}>
-
-<img className={style.userphotowrapper} src={image}/> 
-<div className={style.usernamewrapper}>{username}</div>
-   </div>
+  
 
                 <div className={style.Footerdiv}>
 
@@ -33,10 +27,10 @@ const ItemComponent=({title,text,price,image,username,profilenav})=>{
                 </div>
                 </div>
 
-            </div>
+             
         </div>
     )
 
 }
 
-export default ItemComponent;
+export default SellerItems;
