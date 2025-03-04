@@ -6,7 +6,7 @@ import TopSellersItem from "../../TopSellersItem/TopSellersItem";
  import ItemComponent from "../../../Components/ItemComponent/ItemComponent";
 import HeadingComponent from "../../../Components/HeadingComponent/HeadingComponent";
 import SellerCreationViaCommentModal from "../../../Components/SellerCreationViaCommentModal/SellerCreationViaCommentModal";
-
+import LoadingModal from "../../../Components/LoadingModal/LoadingModal";
 import AdminApproveMessageModal from "../../../Components/AdminApproveMessageModal/AdminApproveMessageModal";
 const MainPage= () => {
 
@@ -185,6 +185,8 @@ const MainPage= () => {
                 <HeadingComponent/>
                 { state.sellerreviewmodal    &&   <SellerCreationViaCommentModal CloseWithMessageModal={CloseWithMessageModal} CloseModal={CloseReviewmodal}/>} 
                 {state.adminapprovemessageModal && <AdminApproveMessageModal CloseMessageModal={CloseMessageModal}/>}
+        
+                  {  state.Loading &&  <LoadingModal/>}
             <div className={styles.wrapper}>
  
                 <div className={styles.content}>

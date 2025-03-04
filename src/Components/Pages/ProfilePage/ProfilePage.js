@@ -6,14 +6,14 @@ import MyItemFragments from "../../MyItemsFragment/MyItemFragments";
 import MyReviewsFragment  from "../../MyReviewsFragment/MyReviewsFragment";
 import ChangePasswordFragment from "../../ChangePasswordFragment/ChangePasswordFragment";
 import   HeadingComponent from "../../HeadingComponent/HeadingComponent";
-const  ProfilePage=()=>{
+ const  ProfilePage=()=>{
     
     const [Data,setData]=useState({
 
         reviewsFragment:false,
         myItemsFragment:true,
         changePasswordFragment:false,
-
+            Loading:false,
 
 
     })
