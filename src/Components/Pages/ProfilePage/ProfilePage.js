@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import MyItemFragments from "../../MyItemsFragment/MyItemFragments";
 import MyReviewsFragment  from "../../MyReviewsFragment/MyReviewsFragment";
 import ChangePasswordFragment from "../../ChangePasswordFragment/ChangePasswordFragment";
+import   HeadingComponent from "../../HeadingComponent/HeadingComponent";
 const  ProfilePage=()=>{
     
     const [Data,setData]=useState({
@@ -49,7 +50,7 @@ const  ProfilePage=()=>{
 
 
         <div className={style.mainWrapper}>
-
+        <HeadingComponent/>
 
         <div className={style.MainContainer}>
 

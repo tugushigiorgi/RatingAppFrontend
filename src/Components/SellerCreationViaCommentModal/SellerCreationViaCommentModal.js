@@ -1,10 +1,13 @@
 
-import { useState } from "react";
- 
-import style from "./WriteUserReviewModal.module.css"
-const WriteUserReviewModal =({CloseModal,CloseReviveModalVithReview})=>{
 
-    const [state,setState] = useState({ starvalue:1, starTypes:[1,0,0,0,0],comment:"",Successmessage:"",userInputErrorsData:[]})
+import style from "./SellerCreationViaCommentModal.module.css";
+
+ 
+import { useState } from "react";
+
+const SellerCreationViaCommentModal=({CloseModal,CloseWithMessageModal})=>{
+
+    const [state,setState] = useState({ starvalue:1, starTypes:[1,0,0,0,0],name:"",surname:"",      comment:"",Successmessage:"",userInputErrorsData:[]})
     const handleGetData = (e) => {
         const { value, name } = e.target;
         setState(prevdata => {
@@ -14,7 +17,7 @@ const WriteUserReviewModal =({CloseModal,CloseReviveModalVithReview})=>{
             }
         })
     }
-
+  
 
 const SubmitHandler = ()=>{
 
@@ -24,23 +27,28 @@ const SubmitHandler = ()=>{
             userInputErrorsData:[]
         }
     })
-    const {starvalue,comment } = state;
+    const {starvalue,comment,name,surname } = state;
 
 
 
     const errors = [];
- 
+    if (!name .trim()) {
+        errors.push("Seller's name is required.");
+    }  
+    if (!surname .trim()) {
+        errors.push("Seller's surname is required.");
+    }  
 
     if (!comment .trim()) {
         errors.push('Comment is required.');
     }  
 
     if (errors.length === 0) {
-
-        CloseReviveModalVithReview();
+        
         try {
 
            console.log(starvalue,comment)
+           CloseWithMessageModal();
         } catch (error) {
             setState(prevdata => {
                 return {
@@ -95,10 +103,27 @@ const starClickhandler = (position) => {
  
                  <div className={style.modalheader}> 
                  
-                 <div className={style.headertitle}>Write Review</div>
+                 <div className={style.headertitle}>Add Seller & Write Review</div>
                  <button   onClick={()=> CloseModal()} className={style.close}>&times;</button>
                  </div>
- 
+
+
+
+
+                 <div className={style.Inputcontainer}>
+                        <div className={style.InputTitle}>Seller's name</div>
+                        <input onInput={handleGetData }  className={style.inp}  name="name"    type="text" required={true} />
+
+
+                    </div>
+
+                    <div className={style.Inputcontainer}>
+                        <div className={style.InputTitle}>Seller's surname</div>
+                        <input onInput={handleGetData }  className={style.inp}  name="surname"    type="text" required={true} />
+
+
+                    </div>
+
                 <div className={style.StarWrapper}>
 
                 <button   className={style.starbtn} onClick={()=>starClickhandler(1)}> 
@@ -124,11 +149,11 @@ const starClickhandler = (position) => {
 
                  </div>
 
-                 <div className={style.inputsdiv}>
+                 <div className={style.commentinputsdiv}>
  
-              <div className={style.Inputcontainer}>
-                         <div className={style.InputTitle}>Comment</div>
-                         <textarea  style={{ width: '100%', overflowWrap: 'break-word', whiteSpace: 'pre-wrap' }}   className={style.inp}  name="comment" onInput={handleGetData }   type="text" required={true} />
+              <div className={style.commentInputcontainer}>
+                         <div className={style.commentInputTitle}>Comment</div>
+                         <textarea  style={{ width: '100%', overflowWrap: 'break-word', whiteSpace: 'pre-wrap' }}   className={style.commentinp}  name="comment" onInput={handleGetData }   type="text" required={true} />
  
  
                      </div>
@@ -146,4 +171,5 @@ const starClickhandler = (position) => {
          </div>
 }
 
-export default WriteUserReviewModal
+export default SellerCreationViaCommentModal;
+ 

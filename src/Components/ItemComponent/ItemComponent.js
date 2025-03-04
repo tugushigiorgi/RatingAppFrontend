@@ -1,9 +1,13 @@
-
+import {useNavigate} from "react-router";
 
 import style from './ItemComponent.module.css';
 
 
-const ItemComponent=({title,text,price,image,username,profilenav})=>{
+const ItemComponent=({title,text,price,image,username,profilenav,sellerid})=>{
+
+
+
+    const navigate=useNavigate();
 
 
     return (
@@ -19,7 +23,7 @@ const ItemComponent=({title,text,price,image,username,profilenav})=>{
                     <img src={image} alt="Image" className={style.ImageItem}/>
                 </div>
                 <div className={style.txtdiv}> 
-                <div onClick={()=>console.log("AE")} className={style.userinfowrapper}>
+                <div onClick={()=>navigate(`/seller/${sellerid}`)} className={style.userinfowrapper}>
 
 <img className={style.userphotowrapper} src={image}/> 
 <div className={style.usernamewrapper}>{username}</div>

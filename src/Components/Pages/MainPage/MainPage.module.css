@@ -250,3 +250,37 @@ border-radius: 10px;
     padding-top: 9px;
     
 }
+
+.sellerreviewWrapper{
+    display: flex;
+    color: white;
+
+    background-color: rgba(46, 51, 59, 1);padding: 5px;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+
+.Reviewttxt{
+
+        margin-right: 5px;
+}
+
+.reviewBtn{
+    all: unset;
+    width: 80px;
+    text-align: center;
+   transition: 400ms;
+   color: rgba(0, 185, 174, 1);
+    
+}
+
+ 
+
+.reviewBtn:hover{
+
+    color: rgb(12, 117, 110);
+}

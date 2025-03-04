@@ -4,6 +4,8 @@ import style from "./SellerProfilePage.module.css"
 import {useParams} from "react-router";
 import SellerItems from "../../SellerItems/SellerItems"
 import WriteUserReviewModal from "../../WriteUserReviewModal/WriteUserReviewModal"
+import AdminApproveMessageModal from "../../../Components/AdminApproveMessageModal/AdminApproveMessageModal";
+
 const SellerProfilePage= ()=>{
 
     const {sellerid} =useParams()
@@ -29,8 +31,37 @@ const SellerProfilePage= ()=>{
         })
         
     } 
+
+
+    const CloseReviveModalVithReview =()=>{
+
+        setState(prevdata => {
+            return {
+                ...prevdata ,
+                WriteReviewModal:false,
+                adminappoveModal:true,
+            }
+        })
+    }
+
+
+    const CloseMessageModal=()=>{
+        setState(prevdata => {
+            return {
+                ...prevdata ,
+                adminappoveModal:false,
+            }
+        })
+
+
+    }
+
+
+
     const [state,setState]=useState({
+        adminapprovalmessage:false,
         WriteReviewModal:false,
+        adminappoveModal:false,
         items:[
                 
             {id:'1',username :"Giorgi tughushi",title:'title1',text:'cs go skin',uploaddate:'12/02/2024',price:'1300',photo:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC1IyDmN96bgykZI9s6wmy73x8OaWKK3u6jcy480SVi-WTG9kjghhzMgtEEdTv6yxtz4U&usqp=CAU',},
@@ -75,9 +106,11 @@ const SellerProfilePage= ()=>{
         userrating:"12",fullname:"Giorgi tughushi", registrationDate:"12/02/2025", userphoto:"https://www.w3schools.com/howto/img_avatar.png"})
  
     return <div>
-{   state.WriteReviewModal  &&    <WriteUserReviewModal  CloseModal={ CloseModal}/>}
+{   state.WriteReviewModal  &&    <WriteUserReviewModal CloseReviveModalVithReview={CloseReviveModalVithReview} CloseModal={ CloseModal}/>}
+{state.adminappoveModal && <AdminApproveMessageModal CloseMessageModal={CloseMessageModal}/>}
+
     <div className={style.mainWrapper}>
-        
+ 
         <div className={style.Container}>
 
             <div className={style.SellerDetailsWrapper}>

@@ -1,0 +1,71 @@
+
+ 
+ .leverxlogo{
+    width: 80px;
+    height: 80px;
+    margin: 10px;
+    border-radius: 10px;
+ }
+
+
+.container {
+    max-width: 1100px;
+    width: 1100px;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+}
+.homebtn{
+    all: unset;
+    color: white;
+    font-size: 20px;
+    transition: 200ms;
+    margin-right: 20px;
+}
+.profilebtn{
+    all: unset;
+    color: white;
+    margin-right: 20px;
+    transition: 200ms;
+    font-size: 20px;
+}
+.active {
+
+    color:  rgba(0, 185, 174, 1);
+}
+.homebtn:hover{
+ color:  rgba(0, 185, 174, 1);
+
+}
+.profilebtn:hover{
+
+     color:  rgba(0, 185, 174, 1);
+}
+
+.signinbtn{
+    all: unset;
+    color: white;
+    font-size: 20px;
+
+    background-color: rgba(45, 51, 60, 1);
+    padding: 10px;
+    border-radius: 10px;
+    width: 100px;
+    transition: 300ms;
+    text-align: center;
+}
+
+.navwrapper{
+    cursor: pointer;
+}
+
+.signinbtn:hover{
+    color: rgba(0, 185, 174, 1);
+    background-color: rgba(52, 56, 64, 1);
+}

@@ -4,14 +4,17 @@ import apiService from "../../../Services/ApiService";
 import styles from "./MainPage.module.css"
 import TopSellersItem from "../../TopSellersItem/TopSellersItem"; 
  import ItemComponent from "../../../Components/ItemComponent/ItemComponent";
+import HeadingComponent from "../../../Components/HeadingComponent/HeadingComponent";
+import SellerCreationViaCommentModal from "../../../Components/SellerCreationViaCommentModal/SellerCreationViaCommentModal";
 
+import AdminApproveMessageModal from "../../../Components/AdminApproveMessageModal/AdminApproveMessageModal";
 const MainPage= () => {
 
 
     const [state, setState] = useState({
         items:[
                 
-            {id:'1',username :"Giorgi tughushi",title:'title1',text:'cs go skin',uploaddate:'12/02/2024',price:'1300',photo:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC1IyDmN96bgykZI9s6wmy73x8OaWKK3u6jcy480SVi-WTG9kjghhzMgtEEdTv6yxtz4U&usqp=CAU',},
+            {id:'1',sellerid :1,username :"Giorgi tughushi",title:'title1',text:'cs go skin',uploaddate:'12/02/2024',price:'1300',photo:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC1IyDmN96bgykZI9s6wmy73x8OaWKK3u6jcy480SVi-WTG9kjghhzMgtEEdTv6yxtz4U&usqp=CAU',},
             {id:'2',username :"giorgi tughushi",title:'title2',text:'cs go wapon',uploaddate:'12/02/2083',price:'1898',photo:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg0DfHPH08Be-7VNEftuZSfykUJnl_c6tHtQ&s',},
             {id:'3',username :"giorgi tughushi",title:'title3',text:'cs go skin',uploaddate:'12/02/2034',price:'1300',photo:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC1IyDmN96bgykZI9s6wmy73x8OaWKK3u6jcy480SVi-WTG9kjghhzMgtEEdTv6yxtz4U&usqp=CAU',},
             {id:'4',username :"giorgi tughushi", title:'title4',text:'cs go wapon',uploaddate:'12/02/2029',price:'1898',photo:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg0DfHPH08Be-7VNEftuZSfykUJnl_c6tHtQ&s',},
@@ -45,7 +48,9 @@ const MainPage= () => {
             {id:'236',username :"giorgi tughushi", title:'title6',text:'cs go wapon',uploaddate:'12/02/2021',price:'138',photo:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV_6EC7Rv1uu_GT_khQ9Esv5khhsv7reHYuaKfvB9aHXZy5gw8Pckb8-ClBwuhBXf9-Zs&usqp=CAU',},
 
     ],
+            sellerreviewmodal:false,
         Loading: true,
+        adminapprovemessageModal :false,
         CurrentSearchType: 'bycategory',
         FilterParameters: {
             
@@ -74,7 +79,22 @@ const MainPage= () => {
             BookData: bookData,
         }));
     };
+        const CloseMessageModal=()=>{
+          
 
+                setState((prevState) => ({...prevState,  adminapprovemessageModal: false }));
+              
+        }
+
+        const CloseReviewmodal=()=>{
+
+            setState((prevState) => ({...prevState, sellerreviewmodal: false }));
+            
+        }
+        const OpenReviewmodal=()=>{
+
+            setState((prevState) => ({...prevState, sellerreviewmodal: true }));
+        }
     const handleError = (error) => {
         setState((prevState) => ({
             ...prevState,
@@ -153,13 +173,22 @@ const MainPage= () => {
     }, [state.Category]);
 
 
+    const CloseWithMessageModal=()=> {
+       
+            setState((prevState) => ({...prevState, sellerreviewmodal: false,adminapprovemessageModal:true  }));
+         
+    }
 
 
     return (
         <div>
-
+                <HeadingComponent/>
+                { state.sellerreviewmodal    &&   <SellerCreationViaCommentModal CloseWithMessageModal={CloseWithMessageModal} CloseModal={CloseReviewmodal}/>} 
+                {state.adminapprovemessageModal && <AdminApproveMessageModal CloseMessageModal={CloseMessageModal}/>}
             <div className={styles.wrapper}>
+ 
                 <div className={styles.content}>
+ 
                     <div className={styles.Categoriesbar}>
                         <div className={styles.CategoriesHeader}>
                     <span className={`material-symbols-outlined ${styles.cateogriesicon}`}>
@@ -257,8 +286,12 @@ const MainPage= () => {
                             <TopSellersItem  username="Giorgi tughushi"  score="24" photo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUHK_xd4GHWvzXkA3DygGiU3---JdQdHXbA_uTguFvckcwsMDakFodlYlaQMv4p6fWM5I&usqp=CAU"   />
 
                         </div>
+                        
                         </div>
-                
+                       <div className={styles.sellerreviewWrapper}>
+                    <div className={styles.Reviewttxt}>Can't find Seller to Review?</div>
+                        <button onClick={()=>OpenReviewmodal()} className={styles.reviewBtn}> Create it !</button>
+                       </div>
  
                     </div>
                     <div className={styles.Bookcontent}>
@@ -311,7 +344,7 @@ const MainPage= () => {
 
                     
                         {state.  items.map((item) => (
-                            <ItemComponent  username={item.username} key={item.id} title={item.title} text={item.text} price={item.price} image={item.photo}   />
+                            <ItemComponent  sellerid={item.sellerid} username={item.username} key={item.id} title={item.title} text={item.text} price={item.price} image={item.photo}   />
                         ))}
 
 
@@ -338,7 +371,15 @@ const MainPage= () => {
                         
            
            
-            </div>  </div> </div>
+            </div> 
+            
+            
+ 
+             </div> 
+            
+            
+ 
+            </div>
     );
 };
 
