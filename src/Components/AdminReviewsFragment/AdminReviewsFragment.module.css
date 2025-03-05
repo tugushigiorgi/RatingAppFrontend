@@ -1,0 +1,87 @@
+
+
+.Container{
+    width: 100%;
+   
+}
+.MainWrapper{
+
+    padding: 5px;
+
+}
+
+
+.FragmentTitleWrapper{
+    display: flex;
+    
+}
+
+.navbutton{
+color:  rgba(166, 166, 168, 1);
+ 
+font-size: 20px;
+transition:100ms;
+cursor: pointer;
+margin-right: 20px;
+}
+
+.navbutton:hover {
+color: black;
+/* border-bottom: 3px solid rgba(118, 68, 251, 1);  */
+}
+
+
+.activesubbutton{
+    font-size: 20px;
+transition:100ms;
+cursor: pointer;
+margin-right: 20px;
+    color: black;
+   border-bottom: 3px solid rgba(118, 68, 251, 1);   
+}
+
+.FragmetnTitle{
+    color: rgb(0, 0, 0);
+   font-size: 20px;
+   margin-bottom: 30px;
+   margin-top: 10px;
+   font-weight: bold;
+}
+.Listwrapper {
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 12px;
+    border: 1px solid rgba(244, 245, 247, 1);
+
+    width: 100%;
+    height: 713px;
+
+    overflow-y: auto; 
+    scrollbar-width: thin; 
+    scrollbar-color: rgba(117, 69, 251, 0.7) rgba(244, 245, 247, 1); /* Track & thumb (Firefox) */
+}
+
+ 
+.Listwrapper::-webkit-scrollbar {
+    width: 10px; /* Scrollbar width */
+}
+
+ 
+.Listwrapper::-webkit-scrollbar-track {
+    background: rgba(244, 245, 247, 1);
+    border-radius: 10px;
+}
+
+ 
+.Listwrapper::-webkit-scrollbar-thumb {
+    background: rgba(117, 69, 251, 0.7);
+    border-radius: 10px;
+    border: 2px solid rgba(244, 245, 247, 1);  
+}
+
+ 
+.Listwrapper::-webkit-scrollbar-thumb:hover {
+    background: rgba(117, 69, 251, 1);  
+}
+
+
+ 

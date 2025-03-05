@@ -1,0 +1,152 @@
+
+.mainWrapper{
+    width: 99%;
+}
+ 
+
+ 
+.Container{
+    width: 100%;
+    background-color: rgba(247, 247, 247, 1);
+    height: auto;
+    border-radius: 10px;
+    padding: 5px;
+    display: flex;
+    align-items:flex-start;
+    
+    
+    margin-top: 5px;
+     cursor: pointer;
+    transition: 300ms;
+
+
+
+     box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+
+
+
+ }
+
+ .infoTitle{
+    color: rgba(177, 177, 179, 1);
+    margin-bottom: 3px;
+ }
+
+ .CommentTitle{
+    color: rgba(177, 177, 179, 1);
+
+ }
+
+ .infoContent{
+   
+ }
+
+ .infowrapper{
+    min-width: 250px;
+    max-width: 250px;
+     
+ }
+
+
+ .Container:hover{
+
+
+
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+
+
+
+
+
+  }
+
+ 
+ 
+
+.declinebtn{
+    all: unset;
+    background-color: white;
+    color: rgba(239, 72, 79, 1);
+    margin-right: 5px;
+    width: 70px;
+ 
+    height: 40px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: 300ms;
+    
+}
+ .declinebtn:hover{
+    border-color:rgba(239, 72, 79, 1);
+    border-width: 1px;
+    border-style: groove;
+     
+ }
+ 
+.acceptbtn{
+    all: unset;
+    background-color: white;
+    color: rgba(117, 69, 251, 1);
+    transition: 300ms;
+    width: 70px;
+ 
+    height: 40px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+.acceptbtn:hover{
+    border-color:rgba(117, 69, 251, 1);
+    border-width: 1px;
+    border-style: groove;
+   
+ }
+
+ 
+
+ .acceptedTxt{
+
+ 
+ 
+    transition: 300ms;
+    width: 80px;
+    display: flex;
+    height: 40px;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+text-align: center;
+color: rgba(117, 69, 251, 1);
+    border-color:rgba(117, 69, 251, 1);
+    font-weight: bold;
+    border-width: 1px;
+    border-style: groove;
+
+ }
+
+ .crudbuttonwrapper{
+    display: flex;
+ }
+
+  
+ .staritem{
+    width: 20px;
+    height: 20px;
+ }
+
+ .starwrapperArray{
+    display: flex;
+ }
+
+ .commentWrapper{
+    width: 90%;
+   
+ }
+ .prwrapepr{
+
+    width: 146px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }

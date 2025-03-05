@@ -1,0 +1,57 @@
+
+
+.Container{
+    width: 100%;
+   
+}
+.MainWrapper{
+
+    padding: 5px;
+
+}
+
+.FragmetnTitle{
+    color: rgb(0, 0, 0);
+   font-size: 20px;
+   margin-bottom: 30px;
+   margin-top: 10px;
+   font-weight: bold;
+}
+.Listwrapper {
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 12px;
+    border: 1px solid rgba(244, 245, 247, 1);
+
+    width: 100%;
+    height: 713px;
+
+    overflow-y: auto; /* Enables vertical scrolling */
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: rgba(117, 69, 251, 0.7) rgba(244, 245, 247, 1); /* Track & thumb (Firefox) */
+}
+
+/* WebKit Scrollbar Styling (Chrome, Edge, Safari) */
+.Listwrapper::-webkit-scrollbar {
+    width: 10px; /* Scrollbar width */
+}
+
+/* Scrollbar track (background area) */
+.Listwrapper::-webkit-scrollbar-track {
+    background: rgba(244, 245, 247, 1);
+    border-radius: 10px;
+}
+
+/* Scrollbar thumb (the draggable part) */
+.Listwrapper::-webkit-scrollbar-thumb {
+    background: rgba(117, 69, 251, 0.7);
+    border-radius: 10px;
+    border: 2px solid rgba(244, 245, 247, 1); /* Space around thumb */
+}
+
+/* Scrollbar thumb on hover */
+.Listwrapper::-webkit-scrollbar-thumb:hover {
+    background: rgba(117, 69, 251, 1); /* Darker color on hover */
+}
+
+
+ 
