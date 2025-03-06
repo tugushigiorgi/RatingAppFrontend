@@ -4,17 +4,18 @@
 }
  
 
+.contentTitle{
+color: rgba(177, 177, 179, 1);
  
+}
 .Container{
     width: 100%;
     background-color: rgba(247, 247, 247, 1);
-    height: auto;
+    height: 60px;
     border-radius: 10px;
     padding: 5px;
     display: flex;
-    align-items:flex-start;
-    
-    
+    align-items: center;
     margin-top: 5px;
      cursor: pointer;
     transition: 300ms;
@@ -26,25 +27,6 @@
 
 
  }
-
- .infoTitle{
-    color: rgba(177, 177, 179, 1);
-    margin-bottom: 3px;
- }
-
- .CommentTitle{
-    color: rgba(177, 177, 179, 1);
-
- }
-
-  
-
- .infowrapper{
-    min-width: 250px;
-    max-width: 250px;
-     
- }
-
 
  .Container:hover{
 
@@ -58,8 +40,18 @@
 
   }
 
- 
- 
+.sellerphoto{
+    height: 50px;
+    width: 50px;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
+.contentwrapper{
+    
+     width: 300px;
+     
+}
 
 .declinebtn{
     all: unset;
@@ -101,9 +93,14 @@
    
  }
 
- 
+ .leftsection{
+    display: flex;
+    width: 99%;
+    justify-content: space-between;
+ }
 
- .acceptedTxt{
+
+ .viewreviewsBtn{
 
  
  
@@ -119,32 +116,54 @@ color: rgba(117, 69, 251, 1);
     border-color:rgba(117, 69, 251, 1);
     font-weight: bold;
     border-width: 1px;
+    cursor: pointer;
     border-style: groove;
+    transition: 300ms;
+ }
+
+ .viewreviewsBtn:hover{
+   background-color:rgba(117, 69, 251, 1);
+   color: white;
+ }
+ .deleteuserBtn{
+    all: unset;
+    transition: 300ms;
+    width: 80px;
+    display: flex;
+    height: 40px;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+text-align: center;
+color: rgb(255, 255, 255);
+   background-color:rgba(236, 71, 77, 1);
+    font-weight: bold;
+ 
+    cursor: pointer;
+    
+    transition: 300ms;
 
  }
 
+ .deleteuserBtn:hover{
+
+    background-color:rgb(192, 17, 23);
+ }
  .crudbuttonwrapper{
     display: flex;
  }
 
-  
- .staritem{
-    width: 20px;
-    height: 20px;
- }
-
- .starwrapperArray{
-    display: flex;
- }
-
- .commentWrapper{
-    width: 90%;
-   
- }
  .prwrapepr{
-
     width: 146px;
     display: flex;
     align-items: center;
     justify-content: center;
  }
+
+
+ .ViewAllcontentwrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}

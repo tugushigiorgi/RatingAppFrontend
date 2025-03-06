@@ -1,0 +1,63 @@
+.Title{
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    margin-bottom: 30px;
+    margin-top: 13px;
+    font-weight: bold;
+}
+
+.SearchbarWrapper{
+margin-bottom: 10px;
+
+}
+.Listwrapper {
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 12px;
+    border: 1px solid rgba(244, 245, 247, 1);
+
+    width: 99%;
+   
+    height: 650px;
+    overflow-y: auto; 
+    scrollbar-width: thin; 
+    scrollbar-color: rgba(117, 69, 251, 0.7) rgba(244, 245, 247, 1); /* Track & thumb (Firefox) */
+}
+
+.searchinput{
+    width: 300px;
+    height: 30px;
+    padding-right: 40px;
+}
+
+.inputbtn{
+    all: unset;
+    cursor: pointer;
+    position: relative;
+    right: 30px;
+    top: 6px;
+}
+.inputbtn:hover{
+    color: rgb(118, 69, 251);
+}
+
+.Listwrapper::-webkit-scrollbar {
+    width: 10px; /* Scrollbar width */
+}
+
+ 
+.Listwrapper::-webkit-scrollbar-track {
+    background: rgba(244, 245, 247, 1);
+    border-radius: 10px;
+}
+
+ 
+.Listwrapper::-webkit-scrollbar-thumb {
+    background: rgba(117, 69, 251, 0.7);
+    border-radius: 10px;
+    border: 2px solid rgba(244, 245, 247, 1);  
+}
+
+ 
+.Listwrapper::-webkit-scrollbar-thumb:hover {
+    background: rgba(117, 69, 251, 1);  
+}

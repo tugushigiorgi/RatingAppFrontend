@@ -191,7 +191,7 @@ const AdminReviewSubFragment=()=>{
 
 
             {state.reviews.map((item) => (
-                <AdminRevivewsListItem id= {item.id  } fullname ={item.fullname} stars={item.stars} date={item.date} comment={item.comment} accepthander={accepthander} declinehandler={declinehandler} />
+                <AdminRevivewsListItem key={item.id} id= {item.id  } fullname ={item.fullname} stars={item.stars} date={item.date} comment={item.comment} accepthander={accepthander} declinehandler={declinehandler} />
 
         ))}
 
