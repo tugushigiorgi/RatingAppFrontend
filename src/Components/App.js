@@ -6,11 +6,16 @@ import PasswordResetPage from "./Pages/PasswordResetPage/PasswordResetPage";
  import MainPage from "./Pages/MainPage/MainPage";
 import SellerProfilePage from "./Pages/SellerProfilePage/SellerProfilePage";
 import AdminPage from "./Pages/AdminPage/AdminPage";
+import WithAuth from "./HOC/WithAuth";
+import WithAdminAuth from "./HOC/WithAdminAuth";
  function App() {
   return (
     <Router>
     <Routes> 
-
+    {/* <WithAuth>
+                      <Header></Header>
+                      <DetailedPage />
+                  </WithAuth>} /> */}
       
     <Route
               path="/seller/:sellerid"

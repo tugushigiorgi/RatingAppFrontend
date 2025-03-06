@@ -5,11 +5,11 @@ import AdminRegistrationsFragment from "../../AdminRegistrationsFragment/AdminRe
 import AdminSellersFragment from "../../AdminSellersFragment/AdminSellersFragment";
 import AdminReviewsFragment from '../../AdminReviewsFragment/AdminReviewsFragment';
 
-
+import {useNavigate} from "react-router";
 
 import {useState} from "react";
 const AdminPage =()=>{
-
+    const navigate=useNavigate()
     const [state,setState] =useState({
 
         adminRegistrationsFragment:true,
@@ -127,7 +127,7 @@ group
 </div>
 <div className={style.FooterWrapper}>
 
-<button className={style.footernavbutton}>
+<button className={style.footernavbutton} onClick={()=>navigate("/login")}>
     <div className={style.navbuttondiv}>
     <span class="material-symbols-outlined">
 logout
