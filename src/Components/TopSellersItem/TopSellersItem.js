@@ -1,11 +1,15 @@
 
 import style from './TopSellersItem.module.css'
+import {useNavigate} from "react-router";
+
+const TopSellersItem =({id,username,score,photo})=>{
 
 
-const TopSellersItem =({username,score,photo})=>{
 
+    const navigate=useNavigate()
+    
 
-    return <div>
+    return <div onClick={()=>{navigate("/seller/"+id)}} >
         <div className={style.MainWrapper}>
         <div className={style.Content}>
          <div className={style.imgwrapper}>

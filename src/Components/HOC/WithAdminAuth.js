@@ -4,20 +4,22 @@ import ApiService from "../../Services/ApiService";
 
 const WithAdminAuth = ({ children }) => {
     const navigate = useNavigate();
+    const checkAdminStatus = async () => {
+        try {
+            const response = await ApiService.isAdmin();
+            
+                
+            if (!response.data.isAdmin) {
 
-    useEffect(() => {
-        const checkAdminStatus = async () => {
-            try {
-                const response = await ApiService.isAdmin();
-                if (!response.data ) {
-
-                    navigate("/signin");
-                }
-            } catch (error) {
-
-                console.error("Error checking admin status:", error);
+                navigate("/");
             }
-        };
+        } catch (error) {
+
+            console.error("Error checking admin status:", error);
+        }
+    };
+    useEffect(() => {
+  
 
 
         checkAdminStatus();

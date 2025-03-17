@@ -1,9 +1,10 @@
 import {useNavigate} from "react-router";
 
 import style from './ItemComponent.module.css';
+import ApiService from "../../Services/ApiService";
 
 
-const ItemComponent=({title,text,price,image,username,profilenav,sellerid})=>{
+const ItemComponent=({title,text,price,image,username,profilenav,sellerid,sellerPictureUrl})=>{
 
 
 
@@ -20,13 +21,13 @@ const ItemComponent=({title,text,price,image,username,profilenav,sellerid})=>{
               
  
                 <div className={style.ImageContainer}>
-                    <img src={image} alt="Image" className={style.ImageItem}/>
+                    <img src={ApiService.staticImagesLocation+ image} alt="Image" className={style.ImageItem}/>
                 </div>
                 <div className={style.txtdiv}> 
                 <div onClick={()=>navigate(`/seller/${sellerid}`)} className={style.userinfowrapper}>
 
-<img className={style.userphotowrapper} src={image}/> 
-<div className={style.usernamewrapper}>{username}</div>
+<img className={style.userphotowrapper} src={ApiService.staticImagesLocation+sellerPictureUrl}/> 
+<div className={style.usernamewrapper}>{username.substring(0,15)}</div>
    </div>
 
                 <div className={style.Footerdiv}>

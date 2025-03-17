@@ -12,6 +12,7 @@ place-items: center;
 
 .content{
 display: flex;
+width: 98%;
 padding-top: 90px;
 }
 
@@ -26,9 +27,9 @@ border-radius: 10px;
     padding-top: 5px;
 }
 
-.Bookcontent{
-width: 900px;
-height: 100%;
+.gamescontent{
+  width:100%;
+ 
 
 
 }
@@ -186,12 +187,24 @@ margin-right: 3px;
 }
 
 .itemslistwrapper{
-
+ 
 display: flex;
-justify-content: center;
+ width: 100%;
 flex-wrap: wrap;
-margin-top: 30px;
+margin-top: 20px;
 }
+
+
+.notfoundWrapper{
+     display: grid;
+     width: 100%;
+     place-items: center;
+ 
+}
+
+
+
+
 
 .ratingrangerinput{
 

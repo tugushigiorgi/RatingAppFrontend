@@ -2,13 +2,15 @@ import style from "./PasswordResetPage.module.css"
 import { useNavigate } from 'react-router';
 import {   Link } from 'react-router-dom';
 import {useEffect, useState} from "react";
+import { useSearchParams } from "react-router-dom";
 import ApiService from "../../../Services/ApiService";
  
 const  PasswordResetPage=()=>{
     const navigate = useNavigate();
-    const [state,setState]=useState({successResetMessage:false,userInputErrorsData:[],code: '', password: '',repeatpassword: ''});
+    const [state,setState]=useState({isSucces:false,isLoading:false,successResetMessage:false,userInputErrorsData:[], password: '',repeatpassword: ''});
 
-
+    const [searchParams] = useSearchParams();
+    const token = searchParams.get("token");
   const handleGetResetData = (e) => {
         const { value, name } = e.target;
         setState(prevdata => {
@@ -20,94 +22,97 @@ const  PasswordResetPage=()=>{
     };
 
 
-
- 
     const handleActionReset = async () => {
-      //  setUserInputErrorsData([]);
-        setState(prevdata => {
-            return {
-                ...prevdata,
-                userInputErrorsData:[]
-            }
-        })
+        // Clear previous errors
+        setState(prevData => ({
+            ...prevData,
+            userInputErrorsData: []  // Clear any previous errors before validating
+        }));
 
-         const { code, password ,repeatpassword} =state;
+        const { password, repeatpassword } = state;
 
+        const errors = [];
 
-
-         const errors = [];
-
-        if (!code.trim()) {
-            errors.push('Code is required.');
-        }
-
+        // Validate password fields
         if (!password.trim()) {
-            errors.push('New Password is required.');
+            errors.push("New Password is required.");
         } else if (password.trim().length < 6) {
-            errors.push('Password should contain at least 6 characters');
+            errors.push("Password should contain at least 6 characters.");
         }
+
         if (!repeatpassword.trim()) {
-            errors.push('Repeat Password is required.');
-        } 
-        else if (password.trim() !== repeatpassword.trim()) {
-            errors.push('Passwords do not match.');
+            errors.push("Repeat Password is required.");
+        } else if (password.trim() !== repeatpassword.trim()) {
+            errors.push("Passwords do not match.");
+        }
+
+        if (errors.length > 0) {
+
+            setState(prevData => ({
+                ...prevData,
+                userInputErrorsData: errors
+            }));
+            return;
         }
 
 
+        try {
+            setState(prevData => ({
+                ...prevData,
+                isLoading: true
+            }));
 
+            const dto = {
+                password: state.password,
+                newpassword: state.repeatpassword,
+                token: token
+            };
 
+            const response = await ApiService.Recoverpass(dto);
 
+            if (response && response.status === 200) {
+                // Success: password updated
+                setState(prevData => ({
+                    ...prevData,
+                    email: "",
+                    isLoading: false,
+                    isSucces: true,
+                    successMessage: "Password updated successfully."
+                }));
+            } else {
 
-        if (errors.length === 0) {
-
-            try {
-
-                const result = await ApiService.ResetPassword(state);
-
-                if (result) {
-                    setState(prevdata => {
-                        return {
-                            ...prevdata,
-                            successResetMessage:true
-                        }
-                    })
-                   // setsuccessResetMessage(true)
-
-                } else {
-                    // setState(prevdata => {
-                    //     return {
-                    //         ...prevdata,
-                    //         userInputErrorsData:['Invalid Code']
-                    //     }
-                    // })
-                  //  setUserInputErrorsData(['Invalid Code']);
-                }
-            } catch (error) {
-                setState(prevdata => {
-                    return {
-                        ...prevdata,
-                        userInputErrorsData:[...error.message]
-                    }
-                })
-               // setUserInputErrorsData([error.message]);
+                handleApiError(response);
             }
-
-
-
-
-        } else {
-            setState(prevdata => {
-                return {
-                    ...prevdata,
-                    userInputErrorsData:[...errors]
-                }
-            })
-          
-
-
+        } catch (error) {
+            // Catch unexpected errors
+            console.error("Error updating password:", error);
+            setState(prevData => ({
+                ...prevData,
+                isLoading: false,
+                userInputErrorsData: ["An unexpected error occurred. Please try again."]
+            }));
         }
-        
     };
+
+
+    const handleApiError = (response) => {
+        let errorMessage = "An unexpected error occurred. Please try again.";
+
+        if (response && response.data) {
+            if (typeof response.data === 'string') {
+                errorMessage = response.data;
+            } else if (response.data.errors) {
+                errorMessage = response.data.errors.join(', ') || errorMessage;
+            }
+        }
+
+        setState(prevData => ({
+            ...prevData,
+            isLoading: false,
+            userInputErrorsData: [errorMessage]
+        }));
+    };
+
 
 
 
@@ -122,12 +127,7 @@ const  PasswordResetPage=()=>{
                 <div className={style.Logincontainer}>
                     <div className={style.Containertitle}>Password Reset</div>
 
-                    <div className={style.Inputcontainer}>
-                        <div className={style.InputTitle}>Code</div>
-                        <input className={style.inp}  name="code" onInput={handleGetResetData}  type="text" required={true} />
-
-
-                    </div>
+                  
                     <div className={style.Inputcontainer}>
                         <div className={style.InputTitle}>New Password</div>
                         <input className={style.inp}  name="password"  onInput={handleGetResetData}   type="password"  required={true} />
@@ -154,20 +154,27 @@ const  PasswordResetPage=()=>{
 
                    
                   
+                    { state.isSucces &&<div className={style.passwrapepr}>Password updated, you can now <Link to='/login' className={style.lnkfw}>log in </Link></div>}
 
 
                     <div className={style.loginfooter}>
 
 
                   <button className={style.signinBtn} onClick={handleActionReset}>
-
-                      Reset
-
+                <div>
+                     Reset
+                </div>
+                     <div>
+   {  state.isLoading  &&         <span className={`material-symbols-outlined ${style.loadingicon}`}>
+progress_activity
+</span>     }</div>
                   </button>
 
-                 </div>
 
-                </div>
+          
+
+                 </div>
+                 </div>
 
 
             </div>

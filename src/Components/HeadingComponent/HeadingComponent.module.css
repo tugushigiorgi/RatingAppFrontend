@@ -48,6 +48,25 @@
      color:  rgba(0, 185, 174, 1);
 }
 
+.logoutBtn{
+
+    all: unset;
+ 
+    color: white;
+    font-size: 15px;
+     align-items: center;
+     justify-content: center;
+    background-color: rgba(45, 51, 60, 1);
+    padding: 10px;
+    border-radius: 10px;
+    width: 100px;
+    transition: 300ms;
+    text-align: center;
+
+}
+
+
+
 .signinbtn{
     all: unset;
     color: white;

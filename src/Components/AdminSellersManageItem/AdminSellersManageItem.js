@@ -3,7 +3,7 @@ import style from "./AdminSellersManageItem.module.css"
 
 
 import {useState} from "react";
-const AdminSellersManageItem=({id,fullname,photo,date,email,stars, openModal,DeleteSeller})=>{
+const AdminSellersManageItem=({id,fullname,photo,date,email,stars, openModal,DeleteSeller,reviews})=>{
 
 
 
@@ -46,7 +46,7 @@ const AdminSellersManageItem=({id,fullname,photo,date,email,stars, openModal,Del
         </div>  
     
         <div className={style.ViewAllcontentwrapper}>
-            <button onClick={()=>openModal(id)} className={style.viewreviewsBtn}>View Reviews</button>
+            <button onClick={()=>openModal(reviews)} className={style.viewreviewsBtn}>View Reviews</button>
           
         </div>  
       

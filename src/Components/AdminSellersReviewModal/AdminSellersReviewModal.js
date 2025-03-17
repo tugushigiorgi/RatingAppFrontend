@@ -4,47 +4,13 @@ import style from "./AdminSellersReviewModal.module.css"
 
 import AdminSellersReviewsModalItem from "../../Components/AdminSellersReviewsModalItem/AdminSellersReviewsModalItem"
 import {useState} from "react"
-const AdminSellersReviewModal =({CloseModal})=>{
+const AdminSellersReviewModal =({CloseModal,reviews})=>{
 
     const [state,setState] =useState({
 
         totalreviewsCount:0,
         reviews:[
-                {
-                    id:1,
-                    date:"2022-01-01",
-                    comment:"Great product!",
-                    stars:4
-                     
-                },
-                {
-                    id:2,
-                    date:"2022-01-01",
-                    comment:"Great product!",
-                    stars:4
-                     
-                },
-                {
-                    id:3,
-                    date:"2022-01-01",
-                    comment:"Great product!",
-                    stars:4
-                     
-                },
-                {
-                    id:4,
-                    date:"2022-01-01",
-                    comment:"Great product!",
-                    stars:4
-                     
-                },
-                {
-                    id:5,
-                    date:"2022-01-01",
-                    comment:"Great product!",
-                    stars:4
-                     
-                },
+                ...reviews,
         ]
 
 
@@ -59,7 +25,7 @@ const AdminSellersReviewModal =({CloseModal})=>{
 
                 <div className={style.modalheader}> 
                 
-                <div className={style.deletetitle}>Reviews</div>
+                <div className={style.deletetitle}>Approved Reviews ({state. reviews.length})</div>
                 <button  onClick={()=>CloseModal()} className={style.close}>&times;</button>
                 </div>
 
@@ -69,7 +35,7 @@ const AdminSellersReviewModal =({CloseModal})=>{
 
 
 {state.reviews.map((item) => (
-                    <AdminSellersReviewsModalItem   key={item.id} date={item.date} comment={item.comment} stars={item.stars}/>
+                    <AdminSellersReviewsModalItem   key={item.id} date={item.publishDate} comment={item.comment} stars={item.review}/>
 
         ))}
 

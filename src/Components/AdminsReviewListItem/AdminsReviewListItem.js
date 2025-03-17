@@ -11,7 +11,7 @@ const AdminsReviewListItem =({id, fullname,stars,date,comment, accepthander , de
     })
 
     const  accept=()=>{
-
+      accepthander(id);
         setState(prevdata => {
             return {
                 ...prevdata ,
@@ -19,7 +19,7 @@ const AdminsReviewListItem =({id, fullname,stars,date,comment, accepthander , de
             }
         })
 
-        accepthander(id);
+        
 
     }
  
@@ -65,7 +65,7 @@ const AdminsReviewListItem =({id, fullname,stars,date,comment, accepthander , de
 
                 </div>
                 {!state.isaccepted &&   <div className={style.crudbuttonwrapper}>
-              <button onClick={() =>  declinehandler(id)} className={style.declinebtn}>decline</button>
+              <button onClick={() =>  declinehandler(id)} className={style.declinebtn}>delete</button>
             <button onClick={()=> accept()} className={style.acceptbtn} >accept</button>
         </div>}
    {  state.isaccepted && <div className={style.prwrapepr}>  <div className={style.acceptedTxt}>Accepted</div></div>  }

@@ -10,64 +10,30 @@ const HeadingComponent =()=>{
 
 
 
-    // const {   setCartVisible,cartItems, setCartItemTotal ,  userballance,setuserballance, ResetAll} = useCart();
-    const navigate=useNavigate()
+     const navigate=useNavigate()
     const { pathname } = useLocation();
-    const  [state,setState]=useState({isAdmin:false, balance:12, cartquantity:0,})
-    // const signout=()=>{
+    const  [state,setState]=useState({isAdmin:false,isLoggedIn:false})
+    const signout=()=>{
 
 
 
-    //     ResetAll()
-    //     localStorage.setItem("token", '')
-    //     navigate("/signin")
+  
+        localStorage.setItem("token", '')
+        navigate("/login")
 
-    // }
-
-    // useEffect(()=>{
-    //     try{
-    //         const token= localStorage.getItem("token")
-
-    //         if(token){
-    //             try {
-    //                 const fetch=async ()=>{
-
-    //                 const { success, data, errorMessage } = await ApiService.HeaderInfo()
-
-    //                 if (success) {
-    //                     setCartItemTotal(data.cartQauntity)
-    //                    setState((prev)=>({...prev,
-    //                     balance: data.balance,
-    //                        isAdmin: data.isAdmin,
-    //                        cartquantity:data.cartQauntity
-    //                    }))
-    //                     setuserballance(data.balance)
-    //                 } else {
-    //                     console.error(`Error fetching all books: ${errorMessage}`);
-    //                 }
-    //                 }
-    //                fetch()
-    //             } catch (error) {
-    //                 console.error(error);
-    //             }
-
-    //         }else{
-
-    //             navigate("/signin")
-
-
-    //         }
-
-    //     }catch (e){
-
-
-    //     }
-
-
-
-    // },[])
+    }
 
      
+    useEffect(()=>{
+        
+            const token= localStorage.getItem("token")
+  
+            if(token){
+                setState((prevState) => ({ ...prevState, isLoggedIn:true}));
+            }
+
+
+    },[])
 
 
     return <div>
@@ -87,8 +53,16 @@ const HeadingComponent =()=>{
           
                
  
-                <button onClick={()=>{navigate("/profile")}}     className={`${style.profilebtn} ${pathname === '/profile' ? style.active : ''}`}>Profile</button>
-                <button  onClick={()=>{navigate("/login")}} className={style.signinbtn}>Sign in</button>
+         {state.isLoggedIn  &&     <button onClick={()=>{navigate("/profile")}}     className={`${style.profilebtn} ${pathname === '/profile' ? style.active : ''}`}>Profile</button>}
+          {!state.isLoggedIn  &&  <button  onClick={()=>{navigate("/login")}} className={style.signinbtn}>Sign in</button>}   
+     
+          {state.isLoggedIn  &&  <button  onClick={()=>{signout()}} className={style.logoutBtn}>
+            <div>
+            log out
+            </div>
+   
+            </button>}   
+
             </div>
 
         </div>

@@ -4,7 +4,7 @@ const WithAuth = ({ children }) => {
     const token = localStorage.getItem("token");
 
     const  navigate=useNavigate()
-    if (!token) return <Navigate to="/signin" />
+    if (!token) return <Navigate to="/login" />
     return <>{children}</>;
 }
 

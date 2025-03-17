@@ -6,6 +6,7 @@ import MyItemFragments from "../../MyItemsFragment/MyItemFragments";
 import MyReviewsFragment  from "../../MyReviewsFragment/MyReviewsFragment";
 import ChangePasswordFragment from "../../ChangePasswordFragment/ChangePasswordFragment";
 import   HeadingComponent from "../../HeadingComponent/HeadingComponent";
+import ApiService from "../../../Services/ApiService";
  const  ProfilePage=()=>{
     
     const [Data,setData]=useState({
@@ -14,37 +15,89 @@ import   HeadingComponent from "../../HeadingComponent/HeadingComponent";
         myItemsFragment:true,
         changePasswordFragment:false,
             Loading:false,
-
+        userinfo:{
+            fullname:" ",
+            email:" ",
+            pictureUrl:" ",
+            registretionDate:" ",
+            rating:"",
+            
+        }
 
     })
 
+
+
+
+
+
     const ShowReviewsFragment=()=>{
-        setData((Data) => ({
-            ...Data,
+        setData((prev) => ({
+            ...prev,
             reviewsFragment:true,
             myItemsFragment:false,
             changePasswordFragment:false,
         }));
     }
     const ShowMyItemsFragment=()=>{
-        setData((Data) => ({
-            ...Data,
+        setData((prev) => ({
+            ...prev,
             reviewsFragment:false,
             myItemsFragment:true,
             changePasswordFragment:false,
         }));
     }
     const ShowChangePasswordFragment=()=>{
-        setData((Data) => ({
-            ...Data,
+        setData((prev) => ({
+            ...prev,
             reviewsFragment:false,
             myItemsFragment:false,
             changePasswordFragment:true,
         }));
     }
 
+    useEffect(()=>{
+
+        fetchdata();
+
+    },[])
+    const fetchdata=()=>{
+        ApiService.getcurrentuserInfo()
+        .then(response=>{
+          
+            if( response &&  response.status===200){
+                console.log(response.data);
+                setData((prevdata) => ({
+                    ...prevdata,
+                    userinfo:{
+                             fullname:response.data.fullName,
+                        email:response.data.email,
+                        pictureUrl: response.data.pictureUrl,
+                        registretionDate:response.data.registretionDate,
+                        rating:response.data.rating,
 
 
+
+                    }
+                })
+            
+            );
+
+
+                
+            }else {
+                    
+        
+        
+                   }
+        
+               }).catch(error=>{
+        
+        
+                       console.log(error);
+        
+              })
+    }
 
     return <div>
 
@@ -62,9 +115,9 @@ import   HeadingComponent from "../../HeadingComponent/HeadingComponent";
          
            
   
-            <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" className={style.ProfilePicture} />
+            <img src={ApiService.staticImagesLocation+Data.userinfo.pictureUrl} alt="Avatar" className={style.ProfilePicture} />
 
-            <div className={style.usernameDiv}>Giorgi tughushi</div>
+            <div className={style.usernameDiv}>{Data.userinfo.fullname}</div>
 
 
 
@@ -85,7 +138,7 @@ mail
 </span>
 
 
-<div className={style.UserInfotxt}>giorgi.tugushi.1@btu.edu.ge</div>
+<div className={style.UserInfotxt}>{Data.userinfo.email}</div>
                </div>
 
                <div className={style.InfoData}>
@@ -94,11 +147,19 @@ mail
 </span>
 
 
-<div className={style.UserInfotxt}>12/02/2023</div>
+<div className={style.UserInfotxt}>{Data.userinfo.registretionDate}</div>
                </div>
+               
+               <div className={style.InfoData}>
+               <span className="material-symbols-outlined">
+               kid_star
+</span>
 
+
+<div className={style.UserInfotxt}>{Data.userinfo.rating}</div>
+               </div>
                 </div>
-
+ 
 
             </div>
 

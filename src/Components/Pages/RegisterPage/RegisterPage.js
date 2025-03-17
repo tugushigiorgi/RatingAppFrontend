@@ -1,56 +1,76 @@
 import style from './RegisterPage.module.css'
 
-import { useNavigate } from 'react-router';
-import {   Link } from 'react-router-dom';
-import {useEffect, useState} from "react";
+import {useNavigate} from 'react-router';
+import {Link} from 'react-router-dom';
+import {useEffect, useState, useRef} from "react";
 import ApiService from "../../../Services/ApiService";
+import ConfirmationEmailModal from "../../ConfirmationEmailModal/ConfirmationEmailModal"
 
-const RegisterPage = ()=>{
+const RegisterPage = () => {
 
 
     const navigate = useNavigate();
     const isValidEmail = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
-    // const [userInputErrorsData, setUserInputErrorsData] = useState([]);
-    // const [RegisterData, setRegisterData] = useState({ name: '', surname: '', email: '', password: '', repeatpassword: '' });
-   
 
+    const photoInputRef = useRef();
 
-    const [state, setState] = useState({ userInputErrorsData:[],name: '', surname: '', email: '', password: '', repeatpassword: '' });
-
+    const [state, setState] = useState({
+        EmailConfirmationModal: false,
+        isloading: false,
+        userInputErrorsData: [],
+        name: '',
+        surname: '',
+        email: '',
+        password: '',
+        repeatpassword: '',
+        photo: ''
+    });
 
 
     const handleGetLoginData = (e) => {
-        const { value, name } = e.target;
-        setState((prevdata) => ({
-            ...prevdata,
-            [name]: value
-        }));
+        const {name, value, files} = e.target;
+
+        if (files && files.length > 0) {
+
+            setState((prevState) => ({
+                ...prevState,
+                [name]: files[0],
+            }));
+        } else {
+
+            setState((prevState) => ({
+                ...prevState,
+                [name]: value,
+            }));
+        }
     };
+    useEffect(() => {
 
-        // useEffect(()=>{
+        const token = localStorage.getItem("token");
+        if (token) {
+            navigate("/")
+        }
+    }, [])
 
-        // const token = localStorage.getItem("token");
-        // if(token) {
-        //     navigate("/")
-        // }},[])
 
-    
-
-    const handleActionLogin = async () => {
-     //   setUserInputErrorsData([]);
+    const handleActionRegister = async () => {
+        //   setUserInputErrorsData([]);
         setState((prevdata) => ({
             ...prevdata,
-            userInputErrorsData:[]
+            userInputErrorsData: []
         }));
         const errors = [];
 
-        const {name,surname, email, password, repeatpassword } = state;
+        const {name, surname, email, password, repeatpassword, photo} = state;
 
 
-        if(!name.trim()){
+        if (!name.trim()) {
             errors.push('Name is required.');
         }
-        if(!surname.trim()){
+        if (!photo) {
+            errors.push('Photo is required.');
+        }
+        if (!surname.trim()) {
             errors.push('Surname is required.');
         }
         if (!email.trim()) {
@@ -70,73 +90,113 @@ const RegisterPage = ()=>{
         }
 
 
-
-        if ( errors.length === 0) {
-
+        if (errors.length === 0) {
 
 
-            try {
-                const result = await ApiService.Register(state);
-                if (result) {
+            const formDataToSend = new FormData();
+            formDataToSend.append("name", state.name);
+            formDataToSend.append("surname", state.surname);
+            formDataToSend.append("email", state.email);
+            formDataToSend.append("password", state.password);
+            // formDataToSend.append("repeatpassword", state.repeatpassword);
+            formDataToSend.append("photo", state.photo);
 
-                    console.log('Register  successful');
-                    navigate("/")
-                } else {
-                    setState((prevdata) => ({
-                        ...prevdata,
-                        userInputErrorsData:['Invalid email or password']
-                    }));
-                  //  setUserInputErrorsData(['Invalid email or password']);
+            setState((prevFormData) => ({
+                ...prevFormData,
+                isloading: true
+            }));
+            ApiService.RegisterUser(formDataToSend)
+                .then(response => {
+                    console.log("API Response:", response);
+
+                    if (response.status === 200) {
+                        setState(prev => ({
+                            ...prev,
+                            title: '',
+                            text: '',
+                            price: '',
+                            photo: '',
+                            EmailConfirmationModal: true,
+                            isloading: false,
+                            userInputErrorsData: [],
+                            SuccessMessage: "User registered successfully! Please check your email."
+                        }));
+
+                        if (photoInputRef.current) {
+                            photoInputRef.current.value = '';
+                        }
+                    } else {
+                        handleError(response);
+                    }
+                })
+                .catch(error => {
+                    console.error("Registration Request Failed:", error);
+                    handleError(error.response);
+                });
+
+
+            const handleError = (response) => {
+                let errorMessage = "An unexpected error occurred. Please try again.";
+
+                if (!response) {
+                    errorMessage = "No response from server. Check your internet connection.";
+                } else if (response.status === 400) {
+                    errorMessage = response.data || "Invalid request. Please check your input.";
+                } else if (response.status === 409) {
+                    errorMessage = "Email already in use.";
+                } else if (response.status === 500) {
+                    errorMessage = "Server error. Please try again later.";
+                } else if (typeof response.data === "string") {
+                    errorMessage = response.data;
+                } else if (typeof response.data === "object") {
+                    errorMessage = response.data.errors?.join(', ') || response.data.message || "An error occurred.";
                 }
-            } catch (error) {
-                setState((prevdata) => ({
-                    ...prevdata,
-                    userInputErrorsData:["Server error"]
+
+                setState(prev => ({
+                    ...prev,
+                    isloading: false,
+                    userInputErrorsData: [errorMessage]
                 }));
-                //setUserInputErrorsData([error.message]);
-            }
-
-
-
-
-
-
-
-
+            };
         } else {
             setState((prevdata) => ({
                 ...prevdata,
-                userInputErrorsData:[...errors]
+                userInputErrorsData: [...errors]
             }));
-            // setUserInputErrorsData(errors);
-            // console.log(userInputErrorsData);
+
         }
     };
 
-
+    const closeConfirmationModal = () => {
+        setState((prevdata) => ({
+            ...prevdata,
+            EmailConfirmationModal: false
+        }));
+    }
 
     return (<div>
         <div className={style.Maindiv}>
-   <Link to="/">  
-                <img   className={style.leverxlogo} src = "https://workshub.imgix.net/63e1b0e3502ceaf9de3491ac0f8deed7?fit=clip&crop=entropy&auto=format" />
 
-                </Link>
+
+            {state.EmailConfirmationModal &&
+                <ConfirmationEmailModal closeConfirmationModal={closeConfirmationModal} email={state.email}/>}
+
             <div className={style.Loginwrapper}>
                 <div className={style.Logincontainer}>
                     <div className={style.Containertitle}>Sign up now</div>
 
                     <div className={style.Inputcontainer}>
                         <div className={style.InputTitle}>Name</div>
-                        <input className={style.inp} onInput={handleGetLoginData}  name="name" type="text"/>
+                        <input className={style.inp} onInput={handleGetLoginData} name="name" type="text"/>
                     </div>
                     <div className={style.Inputcontainer}>
                         <div className={style.InputTitle}>Surname</div>
-                        <input className={style.inp} onInput={handleGetLoginData}  name="surname" type="text"/>
+                        <input className={style.inp} onInput={handleGetLoginData} name="surname" type="text"/>
                     </div>
 
                     <div className={style.Inputcontainer}>
                         <div className={style.InputTitle}>Email</div>
-                        <input className={style.inp} onInput={handleGetLoginData}  name="email" type="text"/>
+                        <input className={style.inp} onInput={handleGetLoginData} name="email" type="text"/>
                     </div>
                     <div className={style.Inputcontainer}>
                         <div className={style.InputTitle}>Password</div>
@@ -147,15 +207,24 @@ const RegisterPage = ()=>{
 
                     <div className={style.Inputcontainer}>
                         <div className={style.InputTitle}>Repeat password</div>
-                        <input className={style.inp} onInput={handleGetLoginData} name="repeatpassword"          type="password"/>
+                        <input className={style.inp} onInput={handleGetLoginData} name="repeatpassword"
+                               type="password"/>
+
+
+                    </div>
+                    <div className={style.Inputcontainer}>
+                        <div className={style.InputTitle}>Picture</div>
+
+                        <input className={style.photoinput} ref={photoInputRef} name="photo" type="file" required={true}
+                               onChange={handleGetLoginData} accept="image/gif,image/jpeg,image/png"/>
 
 
                     </div>
 
-
                     <div className={style.errorWrapper}>
-                        {state.userInputErrorsData && state.userInputErrorsData.map(err => <div key={err}
-                                                                         className={style.Errordiv}>{err}</div>)}
+                        {state.userInputErrorsData && state.userInputErrorsData.map(err =>
+                            <div key={err}
+                                 className={style.Errordiv}>{err}</div>)}
 
 
                     </div>
@@ -164,10 +233,14 @@ const RegisterPage = ()=>{
                     <div className={style.loginfooter}>
 
 
-                        <button className={style.signinBtn} onClick={handleActionLogin}>
-
-                            Sign up
-
+                        <button className={style.signinBtn} onClick={handleActionRegister}>
+                            <div>
+                                Sign up
+                            </div>
+                            <div>
+                                {state.isloading && <span className={`material-symbols-outlined ${style.loadingicon}`}>
+progress_activity
+</span>}</div>
                         </button>
 
                         <div className={style.footertitle}>Already have account ? <Link className={style.signuplink}

@@ -25,7 +25,7 @@ const AdminSellersRegistrationItem=({id,sellerphoto,fullname,email,date, decline
 
 
         <div className={style.sellerphotowrapper}>
-        <img src={sellerphoto} alt="seller photo" className={style.sellerphoto} />
+        <img src={sellerphoto} alt="photo" className={style.sellerphoto} />
 
         </div>
         <div className={style.leftsection}> 

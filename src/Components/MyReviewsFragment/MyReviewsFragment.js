@@ -1,28 +1,62 @@
-
-
-
 import style from './MyReviewsFragment.module.css';
-import { useState } from 'react';
-import  MyReviewsitem from '../MyReviewsItem/MyReviewsitem';
+import {useEffect, useState} from 'react';
+import MyReviewsitem from '../MyReviewsItem/MyReviewsitem';
+import ApiService from '../../Services/ApiService';
+
 const MyReviewsFragment = () => {
-    const [state,setState] = useState({reviews:[
+    const [state, setState] = useState({
+        reviews: []
+    })
 
-            {id :1,date:"12/12/2014", rating:"4", comment:"This is a comment"},
-            {id :2,date:"12/12/2014", rating:"4", comment:"This is a comment"},
-            {id :3, date:"12/12/2014", rating:"4", comment:"This is a comment"},
-            {id :51, date:"12/12/2014", rating:"4", comment:"This is a comment"},
 
-    ]})
+    const fetchData = async () => {
+        try {
+            setState(prevState => ({
+                ...prevState,
+                isLoading: true,
+                errorMessage: '',
+            }));
+
+            const response = await ApiService.getSellerReviews();
+
+            if (response.status === 200) {
+                setState(prevState => ({
+                    ...prevState,
+                    reviews: response.data,
+                    isLoading: false,
+                }));
+            } else if (response.status === 204) {
+                setState(prevState => ({
+                    ...prevState,
+                    reviews: [],
+                    isLoading: false,
+                    errorMessage: "No reviews found.",
+                }));
+            }
+        } catch (error) {
+            setState(prevState => ({
+                ...prevState,
+                isLoading: false,
+                errorMessage: "Failed to fetch reviews. Please try again.",
+            }));
+        }
+    };
+
+
+    useEffect(() => {
+        fetchData();
+
+    }, [])
 
 
     return <div>
-            <div className={style.ReviewsList}> 
+        <div className={style.ReviewsList}>
 
             {state.reviews.map((item) => (
-                <MyReviewsitem key={item.id} date={item.date} rating={item.rating} comment={item.comment} />
+                <MyReviewsitem key={item.id} date={item.publishDate} rating={item.review} comment={item.comment}/>
             ))}
- 
-            </div>
+
+        </div>
     </div>
 
 
