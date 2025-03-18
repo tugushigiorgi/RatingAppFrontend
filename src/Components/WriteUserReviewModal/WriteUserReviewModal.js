@@ -54,7 +54,7 @@ const WriteUserReviewModal = ({sellerid, CloseModal, CloseReviveModalVithReview}
                     sellerId: sellerid
                 };
 
-                // Call the API service to submit the review
+
                 ApiService.WriteRegisteredSellerReview(dto)
                     .then(response => {
                         console.log(response);
@@ -72,7 +72,7 @@ const WriteUserReviewModal = ({sellerid, CloseModal, CloseReviveModalVithReview}
                     .catch(error => {
                         console.error(error);
                         if (error.response) {
-                            // Response exists, typically from 4xx/5xx errors
+
                             setState(prevState => ({
                                 ...prevState,
                                 userInputErrorsData: [error.response.data || 'An unexpected error occurred. Please try again later.']

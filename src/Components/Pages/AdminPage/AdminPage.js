@@ -3,7 +3,7 @@ import AdminRegistrationsFragment from "../../AdminRegistrationsFragment/AdminRe
 import AdminSellersFragment from "../../AdminSellersFragment/AdminSellersFragment";
 import AdminReviewsFragment from '../../AdminReviewsFragment/AdminReviewsFragment';
 
-import {useNavigate} from "react-router";
+import {useNavigate} from "react-router-dom";
 
 import {useState} from "react";
 
@@ -51,7 +51,11 @@ const AdminPage = () => {
         })
 
     }
+    const signout = () => {
+        localStorage.setItem("token", '')
+        navigate("/login")
 
+    }
     return <div>
 
 
@@ -119,7 +123,7 @@ group
                     </div>
                     <div className={style.FooterWrapper}>
 
-                        <button className={style.footernavbutton} onClick={() => navigate("/login")}>
+                        <button className={style.footernavbutton} onClick={() => signout()}>
                             <div className={style.navbuttondiv}>
     <span class="material-symbols-outlined">
 logout

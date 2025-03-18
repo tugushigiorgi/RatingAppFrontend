@@ -1,4 +1,4 @@
-import {Navigate, useNavigate} from "react-router";
+import {Navigate, useNavigate} from "react-router-dom";
 
 const WithAuth = ({ children }) => {
     const token = localStorage.getItem("token");

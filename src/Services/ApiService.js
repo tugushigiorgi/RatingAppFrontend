@@ -1,43 +1,11 @@
-import axios, {Axios} from "axios";
+import axios  from "axios";
 
 
 class ApiService {
     static apiBase = process.env.REACT_APP_APP_BASE;
-
     static staticImagesLocation = 'http://localhost:8080/images/'
-
-
-    static async ResetPassword(data) {
-
-
-        try {
-            const response = await axios.post(`${ApiService.apiBase}/`, data);
-            return true
-        } catch (error) {
-            return false
-        }
-
-    }
-
-// static async Login(credentials){
-
-//     try {
-//         const response = await axios.post(`${ApiService.apiBase}/api/auth/login`, credentials);
-
-
-//         if(response.data.token){
-//             localStorage.setItem("token", response.data.token);
-//             return true
-//         }
-//         return false
-//     } catch (error) {
-//         return false
-//      }
-
-// }
-
-
     static async Login(credentials) {
+        axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         try {
             const response = await axios.post(`${ApiService.apiBase}/api/auth/login`, credentials);
 
@@ -67,31 +35,10 @@ class ApiService {
     }
 
 
-    // static async RegisterUser(formData) {
-    //     axios.defaults.baseURL = 'http://localhost:8080';
-    //
-    //     try {
-    //         const response = await axios.post('/api/auth/register', formData, {
-    //             headers: {
-    //                 'Content-Type': 'multipart/form-data',
-    //             },
-    //         });
-    //         return response;
-    //     } catch (error) {
-    //         console.error('Registration API Error:', error);
-    //
-    //         if (error.response) {
-    //             return error.response;
-    //         } else {
-    //             return {status: 500, data: {errors: ["An unexpected error occurred"]}};
-    //         }
-    //     }
-    // }
     static async RegisterUser(formData) {
-        axios.defaults.baseURL = 'http://localhost:8080';
-
+        axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         try {
-            const response = await axios.post('/api/auth/register', formData, {
+            const response = await axios.post(`${ApiService.apiBase}/api/auth/register`, formData, {
                 headers: {'Content-Type': 'multipart/form-data'},
             });
 
@@ -116,19 +63,17 @@ class ApiService {
                 };
             }
 
-            // Return a generic error if it's not an Axios error
+
             return {status: 500, data: {errors: ["An unknown error occurred."]}};
         }
     }
 
 
     static async CheckConfiramtionCode(code) {
-
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         axios.defaults.headers.common['Content-Type'] = 'application/json'
         try {
-            return await axios.post('http://localhost:8080/api/auth/verify/' + code, {});
+            return await axios.post(`${ApiService.apiBase}/api/auth/verify/` + code, {});
         } catch (error) {
             console.log(error);
         }
@@ -136,27 +81,13 @@ class ApiService {
 
     }
 
-
-    // static async SendRecoverCode(email) {
-    //
-    //     axios.defaults.baseURL = 'http://localhost:8080';
-    //     axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
-    //     axios.defaults.headers.common['Content-Type'] = 'application/json'
-    //     try {
-    //         return await axios.post('http://localhost:8080/api/auth/recovercode/' + email, {});
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    //
-    //
-    // }
     static async SendRecoverCode(email) {
-        axios.defaults.baseURL = 'http://localhost:8080';
+
         axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         axios.defaults.headers.common['Content-Type'] = 'application/json';
 
         try {
-            return await axios.post(`http://localhost:8080/api/auth/recovercode/${encodeURIComponent(email)}`, {});
+            return await axios.post(`${ApiService.apiBase}/api/auth/recovercode/${encodeURIComponent(email)}`, {});
         } catch (error) {
             console.error("API Error:", error.response?.data || error.message);
             throw error;
@@ -164,7 +95,7 @@ class ApiService {
     }
 
     static async getItemById(id) {
-
+        axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         const token = localStorage.getItem('token');
 
         try {
@@ -190,12 +121,10 @@ class ApiService {
 
 
     static async DeleteSellerGame(id) {
-        //const token = localStorage.getItem('token');
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         axios.defaults.headers.common['Content-Type'] = 'application/json'
         try {
-            return await axios.delete(`http://localhost:8080/api/game/${id}`, {
+            return await axios.delete(`${ApiService.apiBase}/api/game/${id}`, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token'),
                 },
@@ -208,13 +137,10 @@ class ApiService {
 
 
     static async getsellerGamesById(id) {
-
-
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         axios.defaults.headers.common['Content-Type'] = 'application/json'
         try {
-            return await axios.get('http://localhost:8080/api/game/' + id, {
+            return await axios.get(`${ApiService.apiBase}/api/game/` + id, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token'),
                 },
@@ -228,30 +154,28 @@ class ApiService {
 
 
     static async getCurrentlyLoggedUserGames() {
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         axios.defaults.headers.common['Content-Type'] = 'application/json';
-
         try {
-            const response = await axios.get('/api/seller/games', {
+            const response = await axios.get(`${ApiService.apiBase}/api/seller/games`, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token'),
                 },
             });
 
-            return response; // Return full response to check status codes
+            return response;
         } catch (error) {
             console.error("Error fetching user games:", error);
-            throw error; // Rethrow to handle in `fetchData`
+            throw error;
         }
     }
 
 
     static async AddNewGameObject(formdata) {
+        axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         const token = localStorage.getItem("token");
-
         try {
-            return await axios.post('http://localhost:8080/api/game', formdata, {
+            return await axios.post(`${ApiService.apiBase}/api/game`, formdata, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${token}`,
@@ -264,14 +188,11 @@ class ApiService {
     }
 
 
-
     static async UpdateGameObjectWithPhoto(formdata) {
         const token = localStorage.getItem("token");
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['access-control-allow-origin'] = 'http://localhost:3000';
-
         try {
-            return await axios.put('http://localhost:8080/api/game/detailed', formdata, {
+            return await axios.put(`${ApiService.apiBase}/api/game/detailed`, formdata, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: 'Bearer ' + token,
@@ -286,11 +207,10 @@ class ApiService {
 
     static async UpdateGameObject(formdata) {
         const token = localStorage.getItem("token");
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['access-control-allow-origin'] = 'http://localhost:3000';
         axios.defaults.headers.common['Content-Type'] = 'multipart/form-data';
         try {
-            return await axios.put('http://localhost:8080/api/game', formdata, {
+            return await axios.put(`${ApiService.apiBase}/api/game`, formdata, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: 'Bearer ' + token,
@@ -303,11 +223,10 @@ class ApiService {
     }
 
     static async gettopratedsellers() {
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['Content-Type'] = 'application/json';
-
+        axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         try {
-            const response = await axios.get('/api/main/topselers');  // relative URL
+            const response = await axios.get(`${ApiService.apiBase}/api/main/topselers`);
             return response;
         } catch (error) {
 
@@ -324,55 +243,47 @@ class ApiService {
     }
 
     static async WriteRegisteredSellerReview(dto) {
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['access-control-allow-origin'] = 'http://localhost:3000';
         axios.defaults.headers.common['Content-Type'] = 'application/json';
 
         try {
-            // Send POST request to the backend
-            const response = await axios.post('/api/main/addcomment', dto);
-            return response;  // Return the response directly for handling in the frontend
+
+            const response = await axios.post(`${ApiService.apiBase}/api/main/addcomment`, dto);
+            return response;
         } catch (error) {
             console.error('Error in submitting review:', error);
 
-            // Propagate the error to the frontend for proper handling
             throw error;
         }
     }
 
 
-
     static async getSellerReviews() {
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         axios.defaults.headers.common['Content-Type'] = 'application/json';
 
         try {
-            const response = await axios.get('/api/seller/reviews', {
+            const response = await axios.get(`${ApiService.apiBase}/api/seller/reviews`, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token'),
                 },
             });
-
-            return response; // Return full response for status checking
+            return response;
         } catch (error) {
             console.error("Error fetching reviews:", error);
-            throw error; // Rethrow for handling in the component
+            throw error;
         }
     }
-
 
 
 //ADMIN
 
     static async AdmingetsellersRequests() {
 
-
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         axios.defaults.headers.common['Content-Type'] = 'application/json'
         try {
-            return await axios.get('http://localhost:8080/api/admin/users/requests', {
+            return await axios.get(`${ApiService.apiBase}/api/admin/users/requests`, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token'),
                 },
@@ -387,11 +298,10 @@ class ApiService {
 
     static async isAdmin() {
 
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         axios.defaults.headers.common['Content-Type'] = 'application/json'
         try {
-            return await axios.get('http://localhost:8080/api/user/verifyrole', {
+            return await axios.get(`${ApiService.apiBase}/api/user/verifyrole`, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token'),
                 },
@@ -406,13 +316,10 @@ class ApiService {
 
 //ADMIN
     static async AdminApproveSellerRegistrationRequests(id) {
-
-
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         axios.defaults.headers.common['Content-Type'] = 'application/json'
         try {
-            return await axios.post('http://localhost:8080/api/admin/user/approve/' + id, {
+            return await axios.post(`${ApiService.apiBase}/api/admin/user/approve/` + id,{}, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token'),
                 },
@@ -427,12 +334,10 @@ class ApiService {
     //ADMIN
     static async ReviewsRequestsList() {
 
-
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         axios.defaults.headers.common['Content-Type'] = 'application/json'
         try {
-            return await axios.get('http://localhost:8080/api/admin/comments/requests', {
+            return await axios.get(`${ApiService.apiBase}/api/admin/comments/requests`, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token'),
                 },
@@ -448,13 +353,12 @@ class ApiService {
 //ADMIN 
     static async AdminApproveUserReview(id) {
 
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         axios.defaults.headers.common['Content-Type'] = 'application/json'
         try {
             return await axios.post(
-                `http://localhost:8080/api/admin/comments/approve/${id}`,
-                {}, // Empty body for POST
+                `${ApiService.apiBase}/api/admin/comments/approve/${id}`,
+                {},
                 {
                     headers: {
                         Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -469,11 +373,10 @@ class ApiService {
 //ADMIN
     static async AdminDeclineUserReview(id) {
 
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         axios.defaults.headers.common['Content-Type'] = 'application/json'
         try {
-            return await axios.delete('http://localhost:8080/api/admin/comments/decline/' + id, {
+            return await axios.delete(`${ApiService.apiBase}/api/admin/comments/decline/` + id, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token'),
                 },
@@ -486,12 +389,10 @@ class ApiService {
 
     static async getRegisteredSellersDetailed() {
 
-
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         axios.defaults.headers.common['Content-Type'] = 'application/json'
         try {
-            return await axios.get('http://localhost:8080/api/admin/user/registeredusers', {
+            return await axios.get(`${ApiService.apiBase}/api/admin/user/registeredusers`, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token'),
                 },
@@ -505,12 +406,10 @@ class ApiService {
 
     static async getRegisteredSellersDetailedByUsername(username) {
 
-
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         axios.defaults.headers.common['Content-Type'] = 'application/json'
         try {
-            return await axios.get('http://localhost:8080/api/admin/user/registeredusers/' + username, {
+            return await axios.get(`${ApiService.apiBase}/api/admin/user/registeredusers/` + username, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token'),
                 },
@@ -524,12 +423,10 @@ class ApiService {
 
     static async deleteUserById(id) {
 
-
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         axios.defaults.headers.common['Content-Type'] = 'application/json'
         try {
-            return await axios.delete('http://localhost:8080/api/admin/user/' + id, {
+            return await axios.delete(`${ApiService.apiBase}/api/admin/user/` + id, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token'),
                 },
@@ -542,14 +439,11 @@ class ApiService {
 
 
     static async getcurrentuserInfo() {
-
-
         const token = localStorage.getItem("token");
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         axios.defaults.headers.common['Content-Type'] = 'application/json'
         try {
-            return await axios.get('http://localhost:8080/api/seller/info', {
+            return await axios.get(`${ApiService.apiBase}/api/seller/info`, {
                 headers: {
                     Authorization: 'Bearer ' + token,
                 },
@@ -562,11 +456,10 @@ class ApiService {
 
 
     static async ChangePassword(dto) {
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['Content-Type'] = 'application/json';
-
+        axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         try {
-            const response = await axios.put('/api/user/password', dto, {
+            const response = await axios.put(`${ApiService.apiBase}/api/user/password`, dto, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token'),
                 },
@@ -580,47 +473,29 @@ class ApiService {
 
 
     static async getSellerProfileInfo(sellerId) {
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         axios.defaults.headers.common['Content-Type'] = 'application/json';
 
         try {
-            const response = await axios.get(`/api/main/SellerProfile/${sellerId}`);
-            return response;  // Return the response object
+            const response = await axios.get(`${ApiService.apiBase}/api/main/SellerProfile/${sellerId}`);
+            return response;
         } catch (error) {
             console.error('Error fetching seller profile:', error);
-            // Throw error for the calling function to handle
+
             throw new Error(error.message || 'Failed to fetch seller profile data');
         }
     }
 
 
-    static async getSellerProfileInfo(sellerId) {
 
-
-        axios.defaults.baseURL = 'http://localhost:8080';
-        axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
-        axios.defaults.headers.common['Content-Type'] = 'application/json';
-
-
-        try {
-            return await axios.get('http://localhost:8080/api/main/SellerProfile/' + sellerId, {});
-
-        } catch (error) {
-            console.log(error);
-        }
-
-
-    }
 
 
     static async Recoverpass(dto) {
-        axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
         axios.defaults.headers.common['Content-Type'] = 'application/json';
 
         try {
-            const response = await axios.post('/api/auth/updatepassword', dto);
+            const response = await axios.post(`${ApiService.apiBase}/api/auth/updatepassword`, dto);
             return response;
         } catch (error) {
             console.error("Error during password update request:", error);
@@ -632,16 +507,22 @@ class ApiService {
 
 
     static async SearchgameBy(title, userrating) {
-        axios.defaults.baseURL = 'http://localhost:8080';
-        axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
-        axios.defaults.headers.common['Content-Type'] = 'application/json';
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': 'http://localhost:3000',
+            },
+        };
 
         try {
-            const response = await axios.get(`/api/main/search`, {
+
+            const response = await axios.get(`${ApiService.apiBase}/api/main/search`, {
                 params: {
                     title: title || "",
-                    sellerRating: userrating || 0
-                }
+                    sellerRating: userrating || 0,
+                },
+                ...config,
             });
 
             return response.data;
@@ -650,6 +531,7 @@ class ApiService {
             throw error;
         }
     }
+
 
 
 }

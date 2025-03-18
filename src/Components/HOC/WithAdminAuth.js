@@ -1,14 +1,15 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 import ApiService from "../../Services/ApiService";
 
-const WithAdminAuth = ({ children }) => {
+const WithAdminAuth = ({children}) => {
     const navigate = useNavigate();
     const checkAdminStatus = async () => {
         try {
+            if (!localStorage.getItem("token")) {
+                navigate("/login");
+            }
             const response = await ApiService.isAdmin();
-            
-                
             if (!response.data.isAdmin) {
 
                 navigate("/");
@@ -19,7 +20,6 @@ const WithAdminAuth = ({ children }) => {
         }
     };
     useEffect(() => {
-  
 
 
         checkAdminStatus();

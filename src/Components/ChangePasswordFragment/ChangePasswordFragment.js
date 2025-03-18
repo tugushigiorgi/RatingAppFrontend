@@ -4,8 +4,6 @@ import style from './ChangePasswordFragment.module.css';
 import {useState} from 'react';
 
 const ChangePasswordFragment = () => {
-
-
     const [state, setState] = useState({
         Sucessmessage: "",
         userInputErrorsData: [],
@@ -23,8 +21,6 @@ const ChangePasswordFragment = () => {
             }
         })
     };
-
-
     const handleUpdate = async () => {
         setState(prevData => ({
             ...prevData,

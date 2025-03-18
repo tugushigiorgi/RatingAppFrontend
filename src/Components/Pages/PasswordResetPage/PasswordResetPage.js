@@ -1,18 +1,25 @@
 import style from "./PasswordResetPage.module.css"
-import { useNavigate } from 'react-router';
-import {   Link } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {useEffect, useState} from "react";
-import { useSearchParams } from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 import ApiService from "../../../Services/ApiService";
- 
-const  PasswordResetPage=()=>{
+
+const PasswordResetPage = () => {
     const navigate = useNavigate();
-    const [state,setState]=useState({isSucces:false,isLoading:false,successResetMessage:false,userInputErrorsData:[], password: '',repeatpassword: ''});
+    const [state, setState] = useState({
+        isSucces: false,
+        isLoading: false,
+        successResetMessage: false,
+        userInputErrorsData: [],
+        password: '',
+        repeatpassword: ''
+    });
 
     const [searchParams] = useSearchParams();
     const token = searchParams.get("token");
-  const handleGetResetData = (e) => {
-        const { value, name } = e.target;
+    const handleGetResetData = (e) => {
+        const {value, name} = e.target;
         setState(prevdata => {
             return {
                 ...prevdata,
@@ -23,17 +30,17 @@ const  PasswordResetPage=()=>{
 
 
     const handleActionReset = async () => {
-        // Clear previous errors
+
         setState(prevData => ({
             ...prevData,
-            userInputErrorsData: []  // Clear any previous errors before validating
+            userInputErrorsData: []
         }));
 
-        const { password, repeatpassword } = state;
+        const {password, repeatpassword} = state;
 
         const errors = [];
 
-        // Validate password fields
+
         if (!password.trim()) {
             errors.push("New Password is required.");
         } else if (password.trim().length < 6) {
@@ -84,7 +91,7 @@ const  PasswordResetPage=()=>{
                 handleApiError(response);
             }
         } catch (error) {
-            // Catch unexpected errors
+
             console.error("Error updating password:", error);
             setState(prevData => ({
                 ...prevData,
@@ -114,67 +121,68 @@ const  PasswordResetPage=()=>{
     };
 
 
-
-
     return (<div>
 
-         <div className={style.Maindiv}>
-            <Link to="/">  
-                <img   className={style.leverxlogo} src = "https://workshub.imgix.net/63e1b0e3502ceaf9de3491ac0f8deed7?fit=clip&crop=entropy&auto=format" />
+        <div className={style.Maindiv}>
+            <Link to="/">
+                <img className={style.leverxlogo}
+                     src="https://workshub.imgix.net/63e1b0e3502ceaf9de3491ac0f8deed7?fit=clip&crop=entropy&auto=format"/>
 
-                </Link>
+            </Link>
             <div className={style.Loginwrapper}>
                 <div className={style.Logincontainer}>
                     <div className={style.Containertitle}>Password Reset</div>
 
-                  
+
                     <div className={style.Inputcontainer}>
                         <div className={style.InputTitle}>New Password</div>
-                        <input className={style.inp}  name="password"  onInput={handleGetResetData}   type="password"  required={true} />
-
+                        <input className={style.inp} name="password" onInput={handleGetResetData} type="password"
+                               required={true}/>
 
 
                     </div>
                     <div className={style.Inputcontainer}>
                         <div className={style.InputTitle}>Repeat new password</div>
-                        <input className={style.inp}  name="repeatpassword"  onInput={handleGetResetData}   type="password"  required={true} />
-
+                        <input className={style.inp} name="repeatpassword" onInput={handleGetResetData} type="password"
+                               required={true}/>
 
 
                     </div>
-                    {state.successResetMessage && <div  className={style.successdivwrapper} > <div className={style.successMessage}>Password changed successfully. </div> 
-                    
-                    <Link to={"/login"} className={style.loginhref}>Login</Link>
-                
-                 </div>}
+                    {state.successResetMessage && <div className={style.successdivwrapper}>
+                        <div className={style.successMessage}>Password changed successfully.</div>
+
+                        <Link to={"/login"} className={style.loginhref}>Login</Link>
+
+                    </div>}
 
                     <div className={style.errorWrapper}>
-                      {state.userInputErrorsData && state.userInputErrorsData.map(err => <div key={err} className={style.Errordiv}>{err}</div>)}
+                        {state.userInputErrorsData && state.userInputErrorsData.map(err => <div key={err}
+                                                                                                className={style.Errordiv}>{err}</div>)}
                     </div>
 
-                   
-                  
-                    { state.isSucces &&<div className={style.passwrapepr}>Password updated, you can now <Link to='/login' className={style.lnkfw}>log in </Link></div>}
+
+                    {state.isSucces &&
+                        <div className={style.passwrapepr}>Password updated, you can now <Link to='/login'
+                                                                                               className={style.lnkfw}>log
+                            in </Link></div>}
 
 
                     <div className={style.loginfooter}>
 
 
-                  <button className={style.signinBtn} onClick={handleActionReset}>
-                <div>
-                     Reset
-                </div>
-                     <div>
-   {  state.isLoading  &&         <span className={`material-symbols-outlined ${style.loadingicon}`}>
+                        <button className={style.signinBtn} onClick={handleActionReset}>
+                            <div>
+                                Reset
+                            </div>
+                            <div>
+                                {state.isLoading && <span className={`material-symbols-outlined ${style.loadingicon}`}>
 progress_activity
-</span>     }</div>
-                  </button>
+</span>}</div>
+                        </button>
 
 
-          
-
-                 </div>
-                 </div>
+                    </div>
+                </div>
 
 
             </div>

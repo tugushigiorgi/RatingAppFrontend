@@ -5,7 +5,6 @@ import ApiService from "../../Services/ApiService";
 const AddNewItemModal = ({CloseNewItemModal, addnewitemhandler}) => {
 
     const photoInputRef = useRef();
-
     const [state, setState] = useState({
         Successmessage: '',
         userInputErrorsData: [],
@@ -14,8 +13,6 @@ const AddNewItemModal = ({CloseNewItemModal, addnewitemhandler}) => {
         price: '',
         photo: ''
     })
-
-
     const handleGetInputData = (e) => {
         const {name, value, files} = e.target;
 
@@ -41,7 +38,7 @@ const AddNewItemModal = ({CloseNewItemModal, addnewitemhandler}) => {
             Successmessage: "",
         }));
 
-        const { title, text, price, photo } = state;
+        const {title, text, price, photo} = state;
         const errors = [];
 
         if (!title.trim()) errors.push("Title is required.");
@@ -103,44 +100,32 @@ const AddNewItemModal = ({CloseNewItemModal, addnewitemhandler}) => {
 
 
     return <div id="myModal" className={style.modal}>
-
-
         <div className={style.modalcontent}>
-
             <div className={style.modalheader}>
-
                 <div className={style.headertitle}>Add new item</div>
                 <button onClick={() => CloseNewItemModal()} className={style.close}>&times;</button>
             </div>
-
             <div className={style.inputsdiv}>
-
                 <div className={style.Inputcontainer}>
                     <div className={style.InputTitle}>Title</div>
-                    <input className={style.inp} value={state.title} name="title" onInput={handleGetInputData} type="text" required={true}/>
-
-
+                    <input className={style.inp} value={state.title} name="title" onInput={handleGetInputData}
+                           type="text" required={true}/>
                 </div>
                 <div className={style.Inputcontainer}>
                     <div className={style.InputTitle}>Text</div>
-                    <input className={style.inp} value={state.text} onInput={handleGetInputData} name="text" type="text" required={true}/>
-
-
+                    <input className={style.inp} value={state.text} onInput={handleGetInputData} name="text" type="text"
+                           required={true}/>
                 </div>
                 <div className={style.Inputcontainer}>
                     <div className={style.InputTitle}>Price</div>
-                    <input className={style.inp} value={state.price} name="price" onInput={handleGetInputData} type="number"
+                    <input className={style.inp} value={state.price} name="price" onInput={handleGetInputData}
+                           type="number"
                            required={true}/>
-
-
                 </div>
                 <div className={style.Inputcontainer}>
                     <div className={style.InputTitle}>Picture</div>
-
                     <input className={style.photoinput} ref={photoInputRef} name="photo" type="file" required={true}
                            onChange={handleGetInputData} accept="image/gif,image/jpeg,image/png"/>
-
-
                 </div>
 
             </div>

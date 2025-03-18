@@ -1,35 +1,16 @@
-
 import style from "./AdminReviewsFragment.module.css"
+import AdminReviewSubFragment from "../../Components/AdminReviewSubFragment/AdminReviewSubFragment"
 
-import {useState} from "react";
- import  AdminReviewSubFragment from "../../Components/AdminReviewSubFragment/AdminReviewSubFragment"
-
-const AdminReviewsFragment=()=>{
-
-  
-
- 
-
+const AdminReviewsFragment = () => {
     return <div className={style.MainWrapper}>
-
-    <div className={style.Conteiner}>
-
-    <div className={style.FragmetnTitle}>Reviews requests</div>
-  
-    <div className={style.subfragmentwrapper}>
-
- 
-    <div className={style.Fragment}>
-
-       <AdminReviewSubFragment/> 
-   
-    </div>
-
-    </div>
-
-
-
-    </div>  
+        <div className={style.Conteiner}>
+            <div className={style.FragmetnTitle}>Reviews requests</div>
+            <div className={style.subfragmentwrapper}>
+                <div className={style.Fragment}>
+                    <AdminReviewSubFragment/>
+                </div>
+            </div>
+        </div>
     </div>
 }
 

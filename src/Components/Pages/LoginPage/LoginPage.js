@@ -1,5 +1,5 @@
 import style from "./LoginPage.module.css"
-import {useNavigate} from 'react-router';
+import {useNavigate} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import {useEffect, useState} from "react";
 import ApiService from "../../../Services/ApiService";
@@ -7,8 +7,6 @@ import ForgetPasswordModal from "../../ForgotPasswordModal/ForgetPasswordModal";
 
 const LoginPage = () => {
     const navigate = useNavigate();
-
-
     const emailValidationRegex = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
 
     const [state, setState] = useState({

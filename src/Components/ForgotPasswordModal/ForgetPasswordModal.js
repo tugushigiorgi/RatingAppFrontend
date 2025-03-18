@@ -23,8 +23,6 @@ const ForgetPasswordModal = ({ClosePasswordResetModal}) => {
             }
         })
     }
-
-
     const handleActionLogin = async () => {
         setState(prevData => ({
             ...prevData,
@@ -117,7 +115,8 @@ const ForgetPasswordModal = ({ClosePasswordResetModal}) => {
 
                 <div className={style.Inputcontainer}>
                     <div className={style.InputTitle}>Email</div>
-                    <input className={style.inp} value={state.email} name="email" onInput={handleGetforgotPassword} type="text"
+                    <input className={style.inp} value={state.email} name="email" onInput={handleGetforgotPassword}
+                           type="text"
                            required={true}/>
                 </div>
                 {state.userInputErrorsData && state.userInputErrorsData.map(err => <div key={err}

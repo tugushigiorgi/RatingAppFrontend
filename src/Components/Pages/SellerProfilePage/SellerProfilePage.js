@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import style from "./SellerProfilePage.module.css"
-import {useParams} from "react-router";
+import {useParams} from "react-router-dom";
 import SellerItems from "../../SellerItems/SellerItems"
 import ApiService from "../../../Services/ApiService";
 import WriteUserReviewModal from "../../WriteUserReviewModal/WriteUserReviewModal"
@@ -20,8 +20,6 @@ const SellerProfilePage = () => {
             pictureUrl: '',
             rating: '',
             registretionDate: ''
-
-
         }
 
     })
@@ -138,12 +136,12 @@ const SellerProfilePage = () => {
                             <span className={`material-symbols-outlined ${style.verifiedicon}`}>verified</span>
                         </div>
                         <div className={style.sellerRegistrationDateWrapper}>
-                            <span class="material-symbols-outlined">calendar_month</span>
+                            <span className="material-symbols-outlined">calendar_month</span>
                             <div className={style.registrationtitle}>{state.userinfo.registretionDate}</div>
                         </div>
                         <div className={style.sellerratingwrapper}>
 
-            <span class="material-symbols-outlined">
+            <span className="material-symbols-outlined">
 kid_star
 </span>
                             <div className={style.userratingtxt}>{state.userinfo.rating}</div>
@@ -152,7 +150,7 @@ kid_star
                         <button onClick={() => WriteReviewbtn()} className={style.reviewBtn}>Write Review
 
 
-                            <span class="material-symbols-outlined">
+                            <span className="material-symbols-outlined">
 edit_square
 </span>
                         </button>
@@ -163,7 +161,7 @@ edit_square
 
                 <div>
                     <div className={style.listtitle}>
-                <span class="material-symbols-outlined">
+                <span className="material-symbols-outlined">
 menu
 </span>
                         Seller items

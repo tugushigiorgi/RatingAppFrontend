@@ -190,7 +190,7 @@ const MyItemFragments = () => {
                 <button onClick={() => OpenNewItemModal()} className={style.addnewitemBtn}>
 
                     <div className={style.addbuttoncontent}>
-                <span class="material-symbols-outlined">
+                <span className="material-symbols-outlined">
 add_circle
 </span>
                         <div>Add item</div>

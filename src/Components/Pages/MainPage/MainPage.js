@@ -7,8 +7,9 @@ import ItemComponent from "../../../Components/ItemComponent/ItemComponent";
 import HeadingComponent from "../../../Components/HeadingComponent/HeadingComponent";
 import SellerCreationViaCommentModal
     from "../../../Components/SellerCreationViaCommentModal/SellerCreationViaCommentModal";
-import LoadingModal from "../../../Components/LoadingModal/LoadingModal";
+
 import AdminApproveMessageModal from "../../../Components/AdminApproveMessageModal/AdminApproveMessageModal";
+import LoadingModal from "../../LoadingModal/LoadingModal";
 
 const MainPage = () => {
 
@@ -40,7 +41,7 @@ const MainPage = () => {
         setState((prevState) => ({
             ...prevState,
             CurrentTitle: title,
-
+            Loading:false,
             gameData: shuffleArray(gameData)
 
         }));
@@ -205,7 +206,6 @@ const MainPage = () => {
     };
 
 
-
     const FetchInitialData = async () => {
         try {
 
@@ -234,11 +234,11 @@ const MainPage = () => {
     return (
         <div>
             <HeadingComponent/>
+
             {state.sellerreviewmodal && <SellerCreationViaCommentModal CloseWithMessageModal={CloseWithMessageModal}
                                                                        CloseModal={CloseReviewmodal}/>}
             {state.adminapprovemessageModal && <AdminApproveMessageModal CloseMessageModal={CloseMessageModal}/>}
 
-            {/* {  state.Loading &&  <LoadingModal/>} */}
             <div className={styles.wrapper}>
 
                 <div className={styles.content}>
@@ -349,10 +349,10 @@ const MainPage = () => {
                             </div>
 
                         </div>
-                        <div className={styles.sellerreviewWrapper}>
-                            <div className={styles.Reviewttxt}>Can't find Seller to Review?</div>
-                            <button onClick={() => OpenReviewmodal()} className={styles.reviewBtn}> Create it !</button>
-                        </div>
+                        {/*<div className={styles.sellerreviewWrapper}>*/}
+                        {/*    <div className={styles.Reviewttxt}>Can't find Seller to Review?</div>*/}
+                        {/*    <button onClick={() => OpenReviewmodal()} className={styles.reviewBtn}> Create it !</button>*/}
+                        {/*</div>*/}
 
                     </div>
                     <div className={styles.gamescontent}>
@@ -411,7 +411,7 @@ const MainPage = () => {
 
                         </div>
                         <div className={styles.notfoundWrapper}>
-                            {!state.gameData.length &&
+                            {    !state.Loading && !state.gameData.length &&
                                 <div className={styles.NotFounderror}>
                                     <div> Game(s) not found</div>
                                     <img src="/a9994415-956e-429d-94f8-0bb872c3c485.png" alt="Error Image not found"/>

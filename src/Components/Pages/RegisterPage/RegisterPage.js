@@ -1,6 +1,6 @@
 import style from './RegisterPage.module.css'
 
-import {useNavigate} from 'react-router';
+import {useNavigate} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import {useEffect, useState, useRef} from "react";
 import ApiService from "../../../Services/ApiService";
@@ -54,7 +54,7 @@ const RegisterPage = () => {
 
 
     const handleActionRegister = async () => {
-        //   setUserInputErrorsData([]);
+
         setState((prevdata) => ({
             ...prevdata,
             userInputErrorsData: []
