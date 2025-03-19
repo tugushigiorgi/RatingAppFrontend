@@ -11,6 +11,8 @@ class ApiService {
 
             if (response.data && response.data.token) {
                 localStorage.setItem("token", response.data.token);
+
+
                 return {success: true, role: response.data.role};
             } else {
                 return {success: false, error: "Invalid response from server"};

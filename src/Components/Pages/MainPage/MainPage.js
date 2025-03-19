@@ -41,7 +41,7 @@ const MainPage = () => {
         setState((prevState) => ({
             ...prevState,
             CurrentTitle: title,
-            Loading:false,
+            Loading: false,
             gameData: shuffleArray(gameData)
 
         }));
@@ -411,7 +411,7 @@ const MainPage = () => {
 
                         </div>
                         <div className={styles.notfoundWrapper}>
-                            {    !state.Loading && !state.gameData.length &&
+                            {!state.Loading && !state.gameData.length &&
                                 <div className={styles.NotFounderror}>
                                     <div> Game(s) not found</div>
                                     <img src="/a9994415-956e-429d-94f8-0bb872c3c485.png" alt="Error Image not found"/>

@@ -82,13 +82,13 @@ const ChangePasswordFragment = () => {
                     Newpassword: '',
                     RepeatNewPassword: '',
                     userInputErrorsData: [],
-                    isLoading: false  // Reset loading state
+                    isLoading: false
                 }));
             } else {
                 setState(prevData => ({
                     ...prevData,
                     userInputErrorsData: ["Incorrect Password"],
-                    isLoading: false  // Reset loading state
+                    isLoading: false
                 }));
             }
         } catch (error) {
@@ -96,7 +96,7 @@ const ChangePasswordFragment = () => {
             setState(prevData => ({
                 ...prevData,
                 userInputErrorsData: [error.response?.data || "An unexpected error occurred."],
-                isLoading: false  // Reset loading state
+                isLoading: false
             }));
         }
     };

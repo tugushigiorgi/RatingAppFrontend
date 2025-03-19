@@ -92,7 +92,14 @@ const LoginPage = () => {
                 const result = await ApiService.Login(state);
 
                 if (result.success) {
-                    navigate("/");
+                   if(result.role==="ADMIN"){
+                       navigate("/admin");
+                   }else{
+                       navigate("/");
+                   }
+
+
+
                 } else {
                     setState(prevState => ({
                         ...prevState,

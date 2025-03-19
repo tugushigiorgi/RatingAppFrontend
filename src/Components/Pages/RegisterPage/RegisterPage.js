@@ -112,10 +112,12 @@ const RegisterPage = () => {
                     if (response.status === 200) {
                         setState(prev => ({
                             ...prev,
-                            title: '',
-                            text: '',
-                            price: '',
+                            name: '',
+                            surname: '',
+
                             photo: '',
+                            password: '',
+                            repeatpassword: '',
                             EmailConfirmationModal: true,
                             isloading: false,
                             userInputErrorsData: [],
@@ -187,27 +189,27 @@ const RegisterPage = () => {
 
                     <div className={style.Inputcontainer}>
                         <div className={style.InputTitle}>Name</div>
-                        <input className={style.inp} onInput={handleGetLoginData} name="name" type="text"/>
+                        <input className={style.inp} value={state.name} onInput={handleGetLoginData} name="name" type="text"/>
                     </div>
                     <div className={style.Inputcontainer}>
                         <div className={style.InputTitle}>Surname</div>
-                        <input className={style.inp} onInput={handleGetLoginData} name="surname" type="text"/>
+                        <input className={style.inp} value={state.surname} onInput={handleGetLoginData} name="surname" type="text"/>
                     </div>
 
                     <div className={style.Inputcontainer}>
                         <div className={style.InputTitle}>Email</div>
-                        <input className={style.inp} onInput={handleGetLoginData} name="email" type="text"/>
+                        <input className={style.inp} value={state.email} onInput={handleGetLoginData} name="email" type="text"/>
                     </div>
                     <div className={style.Inputcontainer}>
                         <div className={style.InputTitle}>Password</div>
-                        <input className={style.inp} onInput={handleGetLoginData} name="password" type="password"/>
+                        <input className={style.inp} value={state.password} onInput={handleGetLoginData} name="password" type="password"/>
 
 
                     </div>
 
                     <div className={style.Inputcontainer}>
                         <div className={style.InputTitle}>Repeat password</div>
-                        <input className={style.inp} onInput={handleGetLoginData} name="repeatpassword"
+                        <input className={style.inp} value={state.repeatpassword}   onInput={handleGetLoginData} name="repeatpassword"
                                type="password"/>
 
 

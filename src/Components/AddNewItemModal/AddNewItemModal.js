@@ -132,8 +132,9 @@ const AddNewItemModal = ({CloseNewItemModal, addnewitemhandler}) => {
             {state.Successmessage && <div className={style.Successmessage}>
                 {state.Successmessage}</div>}
             <div className={style.errorWrapper}>
-                {state.userInputErrorsData && state.userInputErrorsData.map(err => <div key={err}
-                                                                                        className={style.Errordiv}>{err}</div>)}
+                {state.userInputErrorsData && state.userInputErrorsData.map((err, index) => (
+                        <div key={index} className={style.Errordiv}>{typeof err === "string" ? err : JSON.stringify(err)}</div>
+                    ))}
             </div>
             <div className={style.Footerdv}>
                 <button onClick={handleAddnewItem} className={style.Addbtn}>Add</button>
